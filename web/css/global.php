@@ -52,7 +52,7 @@ body{
 .middle .menu_header .menu_content .botao .menu_text{
 	display: block;
 	cursor: pointer;
-	padding: 26px 14px 30px 14px;
+	padding: 26px 37px 30px 37px;
 	/*padding-top: 26px;*/
 	font-family: "Lucida Grande","Lucida Sans Unicode","Helvetica","Arial","Verdana","sans-serif";
 	font-size: 14px;
@@ -86,6 +86,7 @@ body{
 	padding-right: 10px;*/
 	padding: 7px 12px;
 	border-top: 1px solid #D1D1D1;
+	min-width: 140px;
 }
 .menu_header .menu_body .submenu_item.submenu_primeiro{
 	-webkit-border-top-left-radius: 5px;
