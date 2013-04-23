@@ -52,7 +52,7 @@
             <div class='menu_text'>Funcionários</div>
             <div class='submenu menu<?php echo $Tabindex;?>'>
                 <div class='submenu_containt'>
-                    <a href="<?php echo BASE_URL;?>/funcionario/Cadastrar">
+                    <a href="<?php echo BASE_URL;?>/funcionario/cadastrar">
                         <div class='submenu_item'>Cadastrar</div>
                     </a>
                     <a href="<?php echo BASE_URL;?>/funcionario/listar">

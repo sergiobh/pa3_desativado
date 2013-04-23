@@ -36,5 +36,10 @@ class LeitoMod extends CI_Model{
             return false;
         }
     }
+
+    public function Listar(){
+
+        
+    }
 }
 ?>
