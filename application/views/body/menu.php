@@ -63,10 +63,10 @@
         </div>
 
         <div class='botao menu_body' tabindex='<?php echo $Tabindex++;?>' submenu='menu<?php echo $Tabindex;?>'>
-            <div class='menu_text'>Acomodações</div>
+            <div class='menu_text'>Hotelaria</div>
             <div class='submenu menu<?php echo $Tabindex;?>'>
                 <div class='submenu_containt'>
-                    <a href="<?php echo BASE_URL;?>/acomodacao/desocupar">
+                    <a href="<?php echo BASE_URL;?>/ocupacao/desocupar">
                         <div class='submenu_item'>Desocupar</div>
                     </a>
                 </div>
