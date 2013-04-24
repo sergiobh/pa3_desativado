@@ -21,7 +21,21 @@ class Paciente extends CI_Controller {
 
 	public function consultar(){
 
+		/* Pode deletar */
+		$this->load->model('PacienteMod');
+		$Pacientes 						= $this->PacienteMod->FilaEspera();
+		$Dados['Pacientes']				= $Pacientes;
+		/* pode deletar */
+
 		$Dados['View'] 					= 'paciente/consultar';
 		$this->load->view('body/index', $Dados);
+	}
+
+	public function getPacientes(){
+		$this->load->model('PacienteMod');
+		$Pacientes 						= $this->PacienteMod->FilaEspera();
+
+		echo 'Irei tratar esse objeto para retornar Json<br /><pre>';
+		print_r($Pacientes);
 	}
 }
