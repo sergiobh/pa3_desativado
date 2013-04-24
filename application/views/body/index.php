@@ -1,3 +1,4 @@
+<!--enrique-->
 <?php
 	$LibHeader 			= 'libraries/header';
 	$LibFooter 			= 'libraries/footer';
