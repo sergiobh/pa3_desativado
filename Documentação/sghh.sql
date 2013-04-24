@@ -10,39 +10,10 @@ Target Server Type    : MYSQL
 Target Server Version : 50610
 File Encoding         : 65001
 
-Date: 2013-04-05 16:22:12
+Date: 2013-04-24 12:05:00
 */
 
 SET FOREIGN_KEY_CHECKS=0;
--- ----------------------------
--- Table structure for `acomodacao`
--- ----------------------------
-DROP TABLE IF EXISTS `acomodacao`;
-CREATE TABLE `acomodacao` (
-  `AcomodacaoId` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `PacienteId` int(10) unsigned NOT NULL,
-  `LeitoId` int(10) unsigned NOT NULL,
-  `FuncCadastro` int(10) unsigned NOT NULL,
-  `DataCad` date NOT NULL,
-  `HoraCad` time NOT NULL,
-  `FuncBaixa` int(10) unsigned DEFAULT NULL,
-  `DataBaixa` date DEFAULT NULL,
-  `HoraBaixa` time DEFAULT NULL,
-  PRIMARY KEY (`AcomodacaoId`),
-  KEY `PacienteId` (`PacienteId`),
-  KEY `LeitoId` (`LeitoId`),
-  KEY `FuncCadastro` (`FuncCadastro`),
-  KEY `FuncBaixa` (`FuncBaixa`),
-  CONSTRAINT `acomodacao_ibfk_1` FOREIGN KEY (`PacienteId`) REFERENCES `paciente` (`PacienteId`),
-  CONSTRAINT `acomodacao_ibfk_2` FOREIGN KEY (`LeitoId`) REFERENCES `leito` (`LeitoId`),
-  CONSTRAINT `acomodacao_ibfk_3` FOREIGN KEY (`FuncCadastro`) REFERENCES `funcionario` (`FuncionarioId`),
-  CONSTRAINT `acomodacao_ibfk_4` FOREIGN KEY (`FuncBaixa`) REFERENCES `funcionario` (`FuncionarioId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of acomodacao
--- ----------------------------
-
 -- ----------------------------
 -- Table structure for `funcionario`
 -- ----------------------------
@@ -53,11 +24,12 @@ CREATE TABLE `funcionario` (
   `Cpf` char(11) NOT NULL,
   `Senha` varchar(10) NOT NULL,
   PRIMARY KEY (`FuncionarioId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of funcionario
 -- ----------------------------
+INSERT INTO `funcionario` VALUES ('1', 'Sérgio Macedo', '01234567890', '123456');
 
 -- ----------------------------
 -- Table structure for `leito`
@@ -71,11 +43,48 @@ CREATE TABLE `leito` (
   PRIMARY KEY (`LeitoId`),
   KEY `QuartoId` (`QuartoId`),
   CONSTRAINT `leito_ibfk_1` FOREIGN KEY (`QuartoId`) REFERENCES `quarto` (`QuartoId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of leito
 -- ----------------------------
+INSERT INTO `leito` VALUES ('1', '1', 'Leito1', '1');
+INSERT INTO `leito` VALUES ('2', '1', 'Leito2', '2');
+INSERT INTO `leito` VALUES ('3', '2', 'Leito1', '1');
+INSERT INTO `leito` VALUES ('4', '2', 'Leito2', '1');
+INSERT INTO `leito` VALUES ('5', '1', 'Leito3', '0');
+INSERT INTO `leito` VALUES ('6', '1', 'Leito4', '1');
+
+-- ----------------------------
+-- Table structure for `ocupacao`
+-- ----------------------------
+DROP TABLE IF EXISTS `ocupacao`;
+CREATE TABLE `ocupacao` (
+  `OcupacaoId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `PacienteId` int(10) unsigned NOT NULL,
+  `LeitoId` int(10) unsigned NOT NULL,
+  `Laudo` text,
+  `FuncCadastro` int(10) unsigned NOT NULL,
+  `DataCad` date NOT NULL,
+  `HoraCad` time NOT NULL,
+  `FuncBaixa` int(10) unsigned DEFAULT NULL,
+  `DataBaixa` date DEFAULT NULL,
+  `HoraBaixa` time DEFAULT NULL,
+  PRIMARY KEY (`OcupacaoId`),
+  KEY `PacienteId` (`PacienteId`),
+  KEY `LeitoId` (`LeitoId`),
+  KEY `FuncCadastro` (`FuncCadastro`),
+  KEY `FuncBaixa` (`FuncBaixa`),
+  CONSTRAINT `ocupacao_ibfk_1` FOREIGN KEY (`PacienteId`) REFERENCES `paciente` (`PacienteId`),
+  CONSTRAINT `ocupacao_ibfk_2` FOREIGN KEY (`LeitoId`) REFERENCES `leito` (`LeitoId`),
+  CONSTRAINT `ocupacao_ibfk_3` FOREIGN KEY (`FuncCadastro`) REFERENCES `funcionario` (`FuncionarioId`),
+  CONSTRAINT `ocupacao_ibfk_4` FOREIGN KEY (`FuncBaixa`) REFERENCES `funcionario` (`FuncionarioId`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ocupacao
+-- ----------------------------
+INSERT INTO `ocupacao` VALUES ('2', '1', '6', null, '1', '2013-04-23', '11:20:35', null, null, null);
 
 -- ----------------------------
 -- Table structure for `paciente`
@@ -114,11 +123,15 @@ CREATE TABLE `quarto` (
   `Identificacao` varchar(10) NOT NULL,
   `Status` tinyint(3) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`QuartoId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of quarto
 -- ----------------------------
+INSERT INTO `quarto` VALUES ('1', '1', 'M01', '1');
+INSERT INTO `quarto` VALUES ('2', '1', 'M02', '1');
+INSERT INTO `quarto` VALUES ('3', '1', 'F01', '1');
+INSERT INTO `quarto` VALUES ('4', '1', 'I01', '1');
 
 -- ----------------------------
 -- Table structure for `telefone`
