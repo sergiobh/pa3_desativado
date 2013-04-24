@@ -1,0 +1,2 @@
+CREATE USER 'sghh'@'%' IDENTIFIED BY 'hotelaria';
+GRANT ALL PRIVILEGES ON *.* TO 'sghh'@'%' WITH GRANT OPTION;
