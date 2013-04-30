@@ -18,4 +18,9 @@ class Funcionario extends CI_Controller {
 		$Dados['View'] 						= 'funcionario/listar';
 		$this->load->view('body/index', $Dados);
 	}
+	
+	public function processar(){
+		$Dados['View'] 					= 'funcionario/processar';
+		$this->load->view('body/index', $Dados);
+	}
 }

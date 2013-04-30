@@ -22,7 +22,7 @@ body{
 .middle .header .logo{
 	background: url('<?php echo BASE_IMG;?>/web/imagens/site/logo.png') no-repeat;
 	width: 260px;
-	height: 80px;
+	height: 110px;
 }
 
 

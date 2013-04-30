@@ -18,4 +18,9 @@ class Quarto extends CI_Controller {
 		$Dados['View'] 					= 'quarto/listar';
 		$this->load->view('body/index', $Dados);
 	}
+	
+	public function processar(){
+		$Dados['View'] 					= 'quarto/processar';
+		$this->load->view('body/index', $Dados);
+	}
 }

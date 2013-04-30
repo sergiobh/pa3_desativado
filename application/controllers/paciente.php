@@ -38,4 +38,15 @@ class Paciente extends CI_Controller {
 		echo 'Irei tratar esse objeto para retornar Json<br /><pre>';
 		print_r($Pacientes);
 	}
+	
+	public function processar(){
+		$Dados['View'] 					= 'paciente/processar';
+		//$this->load->view('body/index', $Dados);
+		
+		//$this->load->model('PacienteMod');
+		
+		
+		
+	}
+
 }
