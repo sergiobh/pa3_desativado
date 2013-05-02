@@ -8,7 +8,6 @@
 		<meta http-equiv="content-language" content="pt-BR" />		
         <link rel="stylesheet" href="<?php echo BASE_URL;?>/web/css/global.php" type="text/css" media="screen" />
 		<script type="text/javascript" src="<?php echo BASE_URL;?>/web/js/jquery/jquery.js"></script>
-		<script type="text/javascript" src="<?php echo BASE_URL;?>/web/js/jquery/jquery.blockUI.js"></script>
 		<script type="text/javascript" src="<?php echo BASE_URL;?>/web/js/global.php"></script>
 	</head>
 	<body>

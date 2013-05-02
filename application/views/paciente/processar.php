@@ -11,6 +11,8 @@
 	$bairro = $_POST["bairro"];
 	$cidade = $_POST["cidade"];
 	$estado = $_POST["estado"];
+	$telefone = $_POST["telefone"];
+	
 	
 	echo($nome).'</br>';
 	echo($sexo).'</br>';
@@ -20,5 +22,6 @@
 	echo($bairro).'</br>';
 	echo($cidade).'</br>';
 	echo($estado).'</br>';
+	echo($telefone).'</br>';
 	
 ?>
