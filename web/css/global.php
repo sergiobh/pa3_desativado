@@ -24,6 +24,11 @@ body{
 	width: 260px;
 	height: 110px;
 }
+.middle .container{
+    margin: 0 auto;
+    min-height: 600px;
+    width: 800px;
+}
 
 
 <?php /*
@@ -109,6 +114,49 @@ body{
 	background-color: #E1E1E1;/*#E9E9E9;*/
 }
 
+
+<?php /* Enrique conteudo do estilo.css */ ?>
+.border { 
+	border:#360 solid 2px;
+}
+
+a:link{
+text-decoration:none
+}
+
+.vazio{
+border-color:red
+}
+
+
+<?php /*
+/* Leito/ Cadastrar
+*/ ?>
+.leito_cadastrar .col_titulo{
+	width: 150px;
+
+}
+.leito_cadastrar td select{
+	width: 260px;	
+}
+.leito_cadastrar td input{
+	width: 254px;
+}
+.leito_cadastrar .botao_submit,
+.leito_cadastrar .botao_reset{
+	width: 100px;
+	margin-top: 20px;
+}
+.leito_cadastrar .botao_reset{
+	margin-left: 15px;
+}
+
+<?php /*
+/* Campo de mensagem de erro
+*/ ?>
+.retorno_ajax{
+	color: #F00;
+}
 
 
 <?php /*

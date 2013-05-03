@@ -48,3 +48,90 @@ $(document).ready(function(){
 	});
 
 });
+
+
+<?php 
+/* Apartir daqui são as funções gerais para todas as telas */
+?>
+
+function validaDados(p_form){		
+	var msg = '';
+	var elementos = p_form.elements;
+
+	for(var i = 0; i < elementos.length; i++){
+		if((elementos[i].value == '') && (elementos[i].getAttribute('obrigatorio') == 'sim')){
+			msg += 'O campo ' + elementos[i].getAttribute('descricao') + ' é obrigatório  \n';
+			elementos[i].className += 'vazio';
+		}
+	}
+	
+	if(msg != ''){
+		alert(msg);
+		return false;
+	}
+	
+	alert("Cadastro realizado com sucesso");
+	return true;
+}
+
+
+function validaDados2(formulario){
+	var msg = '';
+	var elementos 	= $('.'+formulario);
+	elementos 		= elementos[0];
+	var Tipo;
+	var Classe;
+
+//console.log(elementos);
+
+
+	for(var i = 0; i < elementos.length; i++){
+
+		if(elementos[i].getAttribute('obrigatorio') == 'sim'){
+			Tipo = elementos[i].type;
+
+			switch(Tipo){
+				case 'text':
+					if(elementos[i].value == ''){
+						msg += 'O campo ' + elementos[i].getAttribute('descricao') + ' é obrigatório <br />';
+						elementos[i].className += ' vazio';
+					}
+					else{
+						Classe 					= elementos[i].className;
+						Classe 					= Classe.replace("vazio","");
+						elementos[i].className 	= Classe;
+					}
+					break;
+				case 'select-one':
+					if(elementos[i].value == -1){
+						msg += 'O campo ' + elementos[i].getAttribute('descricao') + ' é obrigatório <br />';
+						elementos[i].className += ' vazio';
+					}
+					else{
+						Classe 					= elementos[i].className;
+						Classe 					= Classe.replace("vazio","");
+						elementos[i].className 	= Classe;
+					}
+					break;
+			}
+		}
+	}
+	
+	if(msg != ''){
+		//alert(msg);
+		$('.retorno_ajax').html(msg);
+		fecharMsgErro();
+		return false;
+	}
+
+	return true;
+}
+
+function fecharMsgErro(){
+	setTimeout(
+		function(){
+			$(".retorno_ajax").html('');
+		},
+		5000
+	);		
+}
