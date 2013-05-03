@@ -1,3 +1,4 @@
+<div class='titulo_page'>Cadastro de Leitos</div>
 <div class = 'leito_cadastrar'>
 	<form class='formulario'>
 		<table cellspacing = "10" border = '0'>

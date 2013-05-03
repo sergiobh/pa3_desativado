@@ -94,7 +94,10 @@ function validaDados2(formulario){
 				case 'text':
 					if(elementos[i].value == ''){
 						msg += 'O campo ' + elementos[i].getAttribute('descricao') + ' é obrigatório <br />';
-						elementos[i].className += ' vazio';
+
+						if(elementos[i].className.indexOf('vazio') == -1){
+							elementos[i].className += ' vazio';	
+						}
 					}
 					else{
 						Classe 					= elementos[i].className;
@@ -105,7 +108,10 @@ function validaDados2(formulario){
 				case 'select-one':
 					if(elementos[i].value == -1){
 						msg += 'O campo ' + elementos[i].getAttribute('descricao') + ' é obrigatório <br />';
-						elementos[i].className += ' vazio';
+						
+						if(elementos[i].className.indexOf('vazio') == -1){
+							elementos[i].className += ' vazio';	
+						}
 					}
 					else{
 						Classe 					= elementos[i].className;

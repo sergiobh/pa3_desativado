@@ -29,7 +29,12 @@ body{
     min-height: 600px;
     width: 800px;
 }
-
+.titulo_page{
+	text-align: center;
+	font-size: 25px;
+	color: #333333;
+	margin-bottom: 10px;
+}
 
 <?php /*
 /* Menu
