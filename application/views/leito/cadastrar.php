@@ -85,5 +85,4 @@
 			});	
 		});
 	</script>
-Estamos na view leito/cadastrar
 </div>

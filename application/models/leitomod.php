@@ -13,7 +13,7 @@ class LeitoMod extends CI_Model{
                         ,Q.Andar                
                         ,Q.Identificacao AS Quarto        
                         ,L.Identificacao AS Leito
-                        ,IF(L.Status = '2', 'Arrumação', IF(O.LeitoId IS NULL, 'Liberado', 'Ocupado') ) AS Status
+                        ,IF(L.Status = '2', 'Arrumacao', IF(O.LeitoId IS NULL, 'Liberado', 'Ocupado') ) AS Status
                     FROM
                         leito L
                         INNER JOIN quarto Q ON Q.QuartoId = L.QuartoId
@@ -26,6 +26,7 @@ class LeitoMod extends CI_Model{
                         ,Q.Identificacao
                         ,L.Identificacao
                     ";
+
 
         $query  = $this->db->query($sql);
 
@@ -46,7 +47,7 @@ class LeitoMod extends CI_Model{
                         ,Q.Andar                
                         ,Q.Identificacao AS Quarto        
                         ,L.Identificacao AS Leito
-                        ,IF(L.Status = '0', 'Desativado',  IF(L.Status = '2', 'Arrumação', IF(O.LeitoId IS NULL, 'Liberado', 'Ocupado') ) ) AS Status
+                        ,IF(L.Status = '0', 'Desativado',  IF(L.Status = '2', 'Arrumacao', IF(O.LeitoId IS NULL, 'Liberado', 'Ocupado') ) ) AS Status
                     FROM
                         leito L
                         INNER JOIN quarto Q ON Q.QuartoId = L.QuartoId

@@ -135,6 +135,48 @@ border-color:red
 
 
 <?php /*
+/* Home
+*/ ?>
+.home .home_andar{
+	margin-top: 10px;
+	padding-top: 10px;
+	clear: both;
+}
+.home .home_andar .home_andar_item{
+	margin-top: 15px;	
+	font-size: 22px;
+	color: #F00;
+	font-weight: bold;
+}
+.home .home_andar .home_quarto{
+	margin-top: 5px;
+	clear: both;
+}
+.home .home_andar .home_quarto .home_quarto_item{
+	color: blue;
+	font-weight: bold;
+	padding-top: 10px;
+}
+.home .home_andar .home_quarto .home_leito_item{
+	float: left;
+	width: 266px;
+	height: 26px;
+	text-align: center;
+	margin-top: 5px;
+	padding-top: 3px;
+}
+.home .home_andar .home_quarto .home_leito_item.Ocupado{
+	background-color: #F00;
+}
+.home .home_andar .home_quarto .home_leito_item.Liberado{
+	background-color: #0F0;
+}
+.home .home_andar .home_quarto .home_leito_item.Arrumacao{
+	background-color: #FFFF00;
+}
+
+
+<?php /*
 /* Leito/ Cadastrar
 */ ?>
 .leito_cadastrar .col_titulo{
@@ -162,6 +204,21 @@ border-color:red
 .retorno_ajax{
 	color: #F00;
 }
+
+<?php /*
+/* Footer
+*/ ?>
+.footer{
+	clear: both;
+	width:800px;
+	height:100px;
+	margin-top: 20px;
+	margin-left: 100px;
+	padding-top:20px;
+	background-color:#900;
+	color:#FFF;
+}
+
 
 
 <?php /*
