@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50610
 File Encoding         : 65001
 
-Date: 2013-04-26 17:44:27
+Date: 2013-05-08 21:26:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -49,7 +49,7 @@ CREATE TABLE `leito` (
   PRIMARY KEY (`LeitoId`),
   KEY `QuartoId` (`QuartoId`),
   CONSTRAINT `leito_ibfk_1` FOREIGN KEY (`QuartoId`) REFERENCES `quarto` (`QuartoId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of leito
@@ -60,6 +60,16 @@ INSERT INTO `leito` VALUES ('3', '2', 'Leito1', '1');
 INSERT INTO `leito` VALUES ('4', '2', 'Leito2', '1');
 INSERT INTO `leito` VALUES ('5', '1', 'Leito3', '0');
 INSERT INTO `leito` VALUES ('6', '1', 'Leito4', '1');
+INSERT INTO `leito` VALUES ('7', '1', 'Leito10', '1');
+INSERT INTO `leito` VALUES ('8', '2', 'Sérgio', '1');
+INSERT INTO `leito` VALUES ('9', '5', 'Leito1', '1');
+INSERT INTO `leito` VALUES ('10', '5', 'Leito0', '1');
+INSERT INTO `leito` VALUES ('11', '6', 'Leito1', '1');
+INSERT INTO `leito` VALUES ('12', '5', 'Leito100', '2');
+INSERT INTO `leito` VALUES ('13', '5', 'Leito99', '1');
+INSERT INTO `leito` VALUES ('14', '7', 'Leito1', '1');
+INSERT INTO `leito` VALUES ('15', '8', 'Leito1', '1');
+INSERT INTO `leito` VALUES ('16', '9', 'Leito1', '1');
 
 -- ----------------------------
 -- Table structure for `ocupacao`
@@ -130,7 +140,7 @@ CREATE TABLE `quarto` (
   `Identificacao` varchar(10) NOT NULL,
   `Status` tinyint(3) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`QuartoId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of quarto
@@ -139,6 +149,11 @@ INSERT INTO `quarto` VALUES ('1', '1', 'M01', '1');
 INSERT INTO `quarto` VALUES ('2', '1', 'M02', '1');
 INSERT INTO `quarto` VALUES ('3', '1', 'F01', '1');
 INSERT INTO `quarto` VALUES ('4', '1', 'I01', '0');
+INSERT INTO `quarto` VALUES ('5', '2', 'I01', '1');
+INSERT INTO `quarto` VALUES ('6', '3', 'M01', '1');
+INSERT INTO `quarto` VALUES ('7', 'Ala1', 'M01', '1');
+INSERT INTO `quarto` VALUES ('8', 'Ala2', 'M01', '1');
+INSERT INTO `quarto` VALUES ('9', 'Ala3', 'M01', '1');
 
 -- ----------------------------
 -- Table structure for `telefone`
