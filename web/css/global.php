@@ -137,27 +137,27 @@ border-color:red
 <?php /*
 /* Home
 */ ?>
-.home .home_andar{
+.home_andar{
 	margin-top: 10px;
 	padding-top: 10px;
 	clear: both;
 }
-.home .home_andar .home_andar_item{
+.home_andar .home_andar_item{
 	margin-top: 15px;	
 	font-size: 22px;
 	color: #F00;
 	font-weight: bold;
 }
-.home .home_andar .home_quarto{
+.home_andar .home_quarto{
 	margin-top: 5px;
 	clear: both;
 }
-.home .home_andar .home_quarto .home_quarto_item{
+.home_andar .home_quarto .home_quarto_item{
 	color: blue;
 	font-weight: bold;
 	padding-top: 10px;
 }
-.home .home_andar .home_quarto .home_leito_item{
+.home_andar .home_quarto .home_leito_item{
 	float: left;
 	width: 266px;
 	height: 26px;
@@ -165,14 +165,20 @@ border-color:red
 	margin-top: 5px;
 	padding-top: 3px;
 }
-.home .home_andar .home_quarto .home_leito_item.Ocupado{
+.home_andar .home_quarto .link_leito{
+	color: #000;
+}
+.home_andar .home_quarto .home_leito_item.Ocupado{
 	background-color: #F00;
 }
-.home .home_andar .home_quarto .home_leito_item.Liberado{
+.home_andar .home_quarto .home_leito_item.Liberado{
 	background-color: #0F0;
 }
-.home .home_andar .home_quarto .home_leito_item.Arrumacao{
+.home_andar .home_quarto .home_leito_item.Arrumacao{
 	background-color: #FFFF00;
+}
+.home_andar .home_quarto .home_leito_item.Desativado{
+	background-color: #C0C0C0;
 }
 
 
