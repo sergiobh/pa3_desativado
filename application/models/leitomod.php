@@ -72,7 +72,7 @@ class LeitoMod extends CI_Model{
         }
     }
 
-    public function getLeito(){
+    public function existLeito(){
         if(!is_numeric($this->QuartoId) || $this->Identificacao == ''){
             return false;
         }
@@ -100,6 +100,37 @@ class LeitoMod extends CI_Model{
         }
     }
 
+    public function getLeito(){
+        if(!is_numeric($this->LeitoId)){
+            return false;
+        }
+
+
+        $sql  = "
+                SELECT
+                    L.*
+                    ,Q.Identificacao AS Quarto
+                    ,IF(L.Status = '1', IF(O.LeitoId IS NULL, '1', '3'), L.Status ) AS Status
+                FROM
+                    leito L
+                    INNER JOIN quarto Q ON Q.QuartoId = L.QuartoId
+                    LEFT JOIN ocupacao O ON O.LeitoId = L.LeitoId AND O.FuncBaixa IS NULL
+                WHERE
+                    L.LeitoId = ".$this->LeitoId."
+                ";
+
+        $query  = $this->db->query($sql);
+
+        $dados = $query->row();
+
+        if(is_object($dados)){
+            return $dados;
+        }
+        else{
+            return false;
+        }
+    }
+
     public function setLeito(){
 
         if(! is_numeric($this->QuartoId)){
@@ -116,7 +147,7 @@ class LeitoMod extends CI_Model{
 
 
         // Se não existir poderá ser adicionado
-        if(! $this->getLeito()){
+        if(! $this->existLeito()){
             
             $sql        = "
                             INSERT INTO
@@ -142,6 +173,24 @@ class LeitoMod extends CI_Model{
             echo '{"success": false, "msg": "Leito existente para este quarto!" }';
             exit;
         }
+    }
+
+    public function getStatusAll(){
+        $Item->Status   = 0;
+        $Item->Nome     = 'Desativado';
+        $Status[]       = $Item;
+
+        unset($Item);
+        $Item->Status   = 1;
+        $Item->Nome     = 'Ativo';
+        $Status[]       = $Item;
+
+        unset($Item);
+        $Item->Status   = 2;
+        $Item->Nome     = 'Arrumação';
+        $Status[]       = $Item;
+
+        return $Status;
     }
 }
 ?>

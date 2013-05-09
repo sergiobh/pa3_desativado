@@ -41,8 +41,14 @@ class Leito extends CI_Controller {
 
 		$LeitoId = $this->uri->segment(3);
 
-		// Deletar
-		$Dados['LeitoId']	 = $LeitoId;
+		$this->load->model("LeitoMod");
+		$this->LeitoMod->LeitoId		= $LeitoId;
+		$Leito  						= $this->LeitoMod->getLeito();
+
+		$Status 						= $this->LeitoMod->getStatusAll();
+
+		$Dados['Leito']					= $Leito;
+		$Dados['Status']				= $Status;
 
 		$Dados['View'] 					= 'leito/editar';
 		$this->load->view('body/index', $Dados);

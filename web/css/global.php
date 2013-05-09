@@ -26,7 +26,7 @@ body{
 }
 .middle .container{
     margin: 0 auto;
-    min-height: 600px;
+    min-height: 500px;
     width: 800px;
 }
 .titulo_page{
@@ -183,23 +183,29 @@ border-color:red
 
 
 <?php /*
-/* Leito/ Cadastrar
+/* Leito/ Cadastrar e Editar
 */ ?>
+.leito_editar .col_titulo,
 .leito_cadastrar .col_titulo{
 	width: 150px;
 
 }
+.leito_editar td select,
 .leito_cadastrar td select{
 	width: 260px;	
 }
+.leito_editar td input,
 .leito_cadastrar td input{
 	width: 254px;
 }
+.leito_editar .botao_submit,
+.leito_editar .botao_reset,
 .leito_cadastrar .botao_submit,
 .leito_cadastrar .botao_reset{
 	width: 100px;
 	margin-top: 20px;
 }
+.leito_editar .botao_reset,
 .leito_cadastrar .botao_reset{
 	margin-left: 15px;
 }
