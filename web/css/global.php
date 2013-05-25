@@ -152,12 +152,12 @@ border-color:red
 	margin-top: 5px;
 	clear: both;
 }
-.home_andar .home_quarto .home_quarto_item{
+.home_andar .home_quarto_item{
 	color: blue;
 	font-weight: bold;
 	padding-top: 10px;
 }
-.home_andar .home_quarto .home_leito_item{
+.home_andar .home_leito_item{
 	float: left;
 	width: 266px;
 	height: 26px;
@@ -165,48 +165,43 @@ border-color:red
 	margin-top: 5px;
 	padding-top: 3px;
 }
-.home_andar .home_quarto .link_leito{
+.home_andar .link_leito{
 	color: #000;
 }
-.home_andar .home_quarto .home_leito_item.Ocupado{
+.home_andar .home_leito_item.Ocupado{
 	background-color: #F00;
 }
-.home_andar .home_quarto .home_leito_item.Liberado{
+.home_andar .home_leito_item.Liberado,
+.home_andar .home_leito_item.Ativo{
 	background-color: #0F0;
 }
-.home_andar .home_quarto .home_leito_item.Arrumacao{
+.home_andar .home_leito_item.Arrumacao{
 	background-color: #FFFF00;
 }
-.home_andar .home_quarto .home_leito_item.Desativado{
+.home_andar .home_leito_item.Desativado{
 	background-color: #C0C0C0;
 }
 
 
 <?php /*
-/* Leito/ Cadastrar e Editar
+/* Cadastrar e Editar
 */ ?>
-.leito_editar .col_titulo,
-.leito_cadastrar .col_titulo{
+.col_titulo{
 	width: 150px;
-
 }
-.leito_editar td select,
-.leito_cadastrar td select{
+td select{
 	width: 260px;	
 }
-.leito_editar td input,
-.leito_cadastrar td input{
+td input{
 	width: 254px;
 }
-.leito_editar .botao_submit,
-.leito_editar .botao_reset,
-.leito_cadastrar .botao_submit,
-.leito_cadastrar .botao_reset{
+.botao_submit,
+.botao_reset{
 	width: 100px;
 	margin-top: 20px;
 }
-.leito_editar .botao_reset,
-.leito_cadastrar .botao_reset{
+.botao_reset,
+.botao_reset{
 	margin-left: 15px;
 }
 
