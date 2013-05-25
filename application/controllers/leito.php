@@ -53,4 +53,19 @@ class Leito extends CI_Controller {
 		$Dados['View'] 					= 'leito/editar';
 		$this->load->view('body/index', $Dados);
 	}
+
+	public function salvarEdicao(){
+
+		$LeitoId 		= $this->input->post("LeitoId");
+		$QuartoId	   	= $this->input->post("QuartoId");
+		$Identificacao 	= $this->input->post("Identificacao");
+		$Status 		= $this->input->post("Status");
+
+		$this->load->model("LeitoMod");
+		$this->LeitoMod->LeitoId		= $LeitoId;
+		$this->LeitoMod->QuartoId		= $QuartoId;
+		$this->LeitoMod->Identificacao	= $Identificacao;
+		$this->LeitoMod->Status			= $Status;
+		$this->LeitoMod->setEdicao();
+	}
 }

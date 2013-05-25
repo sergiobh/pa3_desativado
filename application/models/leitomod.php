@@ -77,6 +77,11 @@ class LeitoMod extends CI_Model{
             return false;
         }
 
+        $sql_where      = '';
+
+        if(is_numeric($this->LeitoId) && $this->LeitoId != ''){
+            $sql_where = 'AND L.LeitoId != '.$this->LeitoId;
+        }
 
         $sql  = "
                 SELECT
@@ -86,6 +91,7 @@ class LeitoMod extends CI_Model{
                 WHERE
                     L.Identificacao = '".$this->Identificacao."'
                     AND L.QuartoId = ".$this->QuartoId."
+                    ".$sql_where."
                 ";
 
         $query  = $this->db->query($sql);
@@ -110,6 +116,7 @@ class LeitoMod extends CI_Model{
                 SELECT
                     L.*
                     ,Q.Identificacao AS Quarto
+                    ,Q.QuartoId
                     ,IF(L.Status = '1', IF(O.LeitoId IS NULL, '1', '3'), L.Status ) AS Status
                 FROM
                     leito L
@@ -134,14 +141,14 @@ class LeitoMod extends CI_Model{
     public function setLeito(){
 
         if(! is_numeric($this->QuartoId)){
-            echo '"success": false, "msg": "Favor recarregar a página!"';
+            echo '{"success": false, "msg": "Favor recarregar a página!"}';
             exit;
         }
 
         $this->Identificacao    = trim($this->Identificacao);
 
         if($this->Identificacao == ''){
-            echo '"success": false, "msg": "Favor recarregar a página!"';
+            echo '{"success": false, "msg": "Favor recarregar a página!"}';
             exit;
         }
 
@@ -167,6 +174,50 @@ class LeitoMod extends CI_Model{
             }
             else{
                 echo '{"success": false, "msg": "Ocorreu um erro ao salvar, tente novamente!" }';
+            }
+        }
+        else{
+            echo '{"success": false, "msg": "Leito existente para este quarto!" }';
+            exit;
+        }
+    }
+
+    public function setEdicao(){
+
+        if(! is_numeric($this->LeitoId)){
+            echo '{"success": false, "msg": "Favor recarregar a página!"}';
+            exit;
+        }
+
+        $this->Identificacao    = trim($this->Identificacao);
+
+        if($this->Identificacao == ''){
+            echo '{"success": false, "msg": "Favor recarregar a página!"}';
+            exit;
+        }
+
+
+        // Se não existir poderá ser adicionado
+        if(! $this->existLeito()){
+            
+            $sql        = "
+                            UPDATE 
+                                leito 
+                            SET
+                                Identificacao = '".$this->Identificacao."'
+                                ,Status = ".$this->Status."
+                            WHERE
+                                LeitoId = ".$this->LeitoId."
+                                AND QuartoId = ".$this->QuartoId."
+                            ";
+
+            $this->db->query($sql);
+
+            if($this->db->affected_rows() > 0){
+                echo '{"success": true, "msg": "Dados salvos com sucesso!" }';
+            }
+            else{
+                echo '{"success": false, "msg": "Altere pelo menos um dos campos!" }';
             }
         }
         else{
