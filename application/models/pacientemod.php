@@ -18,8 +18,9 @@ class PacienteMod extends CI_Model{
     public function Listar(){
         $sql    = "
                     SELECT
-                        P.PacienteId
+                        O.OcupacaoId
                         ,Q.Identificacao AS Quarto
+                        ,Q.Andar
                         ,L.Identificacao AS Leito
                         ,P.Nome AS Paciente
                         ,F.Nome AS FuncCadastro

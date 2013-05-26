@@ -13,13 +13,13 @@ body{
 	width: 999px;
 	margin: 0 auto !important;
 }
-.middle .header{
+.middle .header_page{
 	padding-top: 20px;
 	margin: 0 370px 0 370px;
 	position: relative;
 	z-index: 100;
 }
-.middle .header .logo{
+.middle .header_page .logo{
 	background: url('<?php echo BASE_IMG;?>/web/imagens/site/logo.png') no-repeat;
 	width: 260px;
 	height: 110px;
@@ -116,7 +116,7 @@ body{
 	border-bottom-left-radius: 5px;
 }
 .menu_header .menu_body .submenu_item.item_ativo{
-	background-color: #E1E1E1;/*#E9E9E9;*/
+	background-color: #E1E1E1;
 }
 
 
@@ -226,7 +226,76 @@ td input{
 	color:#FFF;
 }
 
+<?php /*
+/* tabela
+*/ ?>
+table.tablesorter {
+    background-color: #CDCDCD;
+    font-family: arial;
+    font-size: 14px;
+    margin: 10px 0 15px;
+    text-align: left;
+    width: 100%;
+}
+table.tablesorter thead tr .header {
+    background-image: url("<?php echo BASE_IMG;?>/web/imagens/site/bg.gif");
+    background-position: right center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+table.tablesorter tfoot tr th {
+    background-color: #E6EEEE;
+    border: 1px solid #FFFFFF;
+    font-size: 8pt;
+    padding: 4px;
+}
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+    background-color: #8DBDD8;
+}
+table.tablesorter thead tr .headerSortUp {
+    background-image: url(<?php echo BASE_IMG;?>/web/imagens/site/asc.gif); 
+}
+table.tablesorter thead tr .headerSortDown {
+    background-image: url(<?php echo BASE_IMG;?>/web/imagens/site/desc.gif); 
+}
+table.tablesorter tbody td {
+    background-color: #FFFFFF;
+    color: #3D3D3D;
+    padding: 4px;
+    vertical-align: top;
+}
+table.tablesorter tbody tr.odd td {
+    background-color: #F0F0F6;
+}
 
+
+
+/*
+table tbody tr.odd td{
+	background-color:#ffffcc;
+}
+table tbody tr.hover td{
+	background-color:#a9d0f5;
+}
+th.headerSortUp { 
+    background-image: url(<?php echo BASE_IMG;?>/web/imagens/site/asc.gif); 
+    background-color: #8dbdd8; 
+} 
+th.headerSortDown { 
+    background-image: url(<?php echo BASE_IMG;?>/web/imagens/site/desc.gif); 
+    background-color: #3399FF; 
+} 
+th.header { 
+    background-image: url(<?php echo BASE_IMG;?>/web/imagens/site/small.gif);
+    cursor: pointer; 
+    font-weight: bold; 
+    background-repeat: no-repeat; 
+    background-position: center left; 
+    padding-left: 20px; 
+    border-right: 1px solid #dad9c7; 
+    margin-left: -1px; 
+}
+*/
 
 <?php /*
 /* Clear
