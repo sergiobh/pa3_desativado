@@ -17,6 +17,23 @@ class Quarto extends CI_Controller {
 		$Dados['View'] 					= 'quarto/listar';
 		$this->load->view('body/index', $Dados);
 	}
+
+	public function getAndar(){
+		$this->load->model('QuartoMod');
+		$Andar 							= $this->QuartoMod->getAndar();
+		$Dados['Andar'] 				= $Andar;
+	}
+
+	public function getQuartos(){
+		$Andar 			= $this->input->post("Andar");
+
+		$this->load->model('QuartoMod');
+		$this->QuartoMod->Andar 		= $Andar;
+		$Quartos 						= $this->QuartoMod->getQuartos();
+		$Dados['Quartos'] 				= $Quartos;
+
+		$this->load->view('quarto/selectQuarto', $Dados);
+	}
 	
 	public function processar(){
 		$Dados['View'] 					= 'quarto/processar';

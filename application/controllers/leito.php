@@ -4,6 +4,9 @@ class Leito extends CI_Controller {
 
 	public function cadastrar()
 	{
+		$this->load->model('QuartoMod');
+		$Andar 							= $this->QuartoMod->getAndar();
+		$Dados['Andar'] 				= $Andar;
 
 		$Dados['View'] 					= 'leito/cadastrar';
 		$this->load->view('body/index', $Dados);

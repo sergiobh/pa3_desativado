@@ -3,13 +3,25 @@
 	<form class='formulario'>
 		<table cellspacing = "10" border = '0'>
 			<tr>
+				<td class='col_titulo'>Andar:</td>
+				<td>
+					<select name = 'AndarId' id='AndarId' descricao = 'Andar' obrigatorio = 'sim'>
+						<option value="-1">--- Selecione ---</option>
+						
+						<?php if($Andar){ ?>
+							<?php foreach($Andar as $Registro) { ?>
+								<option value="<?php echo $Registro->Andar;?>"><?php echo $Registro->Andar;?></option>';
+							<?php } ?>
+						<?php } ?>
+					</select>
+				</td>
+			</tr>
+
+			<tr>
 				<td class='col_titulo'>Quarto:</td>
 				<td>
 					<select name = 'quartoid' id='QuartoId' descricao = 'Quarto' obrigatorio = 'sim'>
-						<option value="-1">--- Selecione ---</option>
-						<option value="1">Quarto1</option>
-						<option value="2">Quarto2</option>
-						<option value="3">Quarto3</option>
+						<option value="-1">--- Selecione o andar ---</option>
 					</select>
 				</td>
 			</tr>
@@ -31,7 +43,35 @@
 
 	<script type="text/javascript">
 		$(document).ready(function(){
-		
+			// Função para carregar os Quartos
+			$('#AndarId').change(function(){
+				if($(this).val() == -1){
+					$('#QuartoId').html('<option value="-1">--- Selecione o andar ---</option>');
+				}
+				else{
+					var Andar 	= $(this).val();
+
+					var Url		= '<?php echo BASE_URL;?>/quarto/getQuartos';
+					var data 	= 'Andar='+Andar;
+
+					$.blockUI({ message: '<h1>Carregando os quartos...</h1>' });
+
+					$.ajax({
+						type: "POST",
+						url: Url,
+						data: data,					
+						success: function(retorno){
+							$('#QuartoId').html('<option value="-1">--- Selecione ---</option>' + retorno);
+							$.unblockUI();
+						},
+						error: function(){
+							$('.retorno_ajax').html('Ocorreu um erro no servidor. Favor recarregar a página!');
+							$.unblockUI();
+						}
+					});
+				}
+			});
+
 			// Função para o click de cadastro
 			$('.botao_submit').click(function(){
 
@@ -82,7 +122,7 @@
 						$.unblockUI();
 					}
 				});
-			});	
+			});
 		});
 	</script>
 </div>

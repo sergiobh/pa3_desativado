@@ -37,6 +37,61 @@ class QuartoMod extends CI_Model{
         }
     }
 
+    public function getAndar(){
+        $sql    = "
+                    SELECT
+                        Q.Andar
+                    FROM
+                        quarto Q
+                    GROUP BY
+                        Q.Andar
+                    ORDER BY
+                        Q.Andar
+                    ";
+
+        $query  = $this->db->query($sql);
+
+        $dados = $query->result();
+
+        if(count($dados) > 0){
+            return $dados;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function getQuartos(){
+        $this->Andar    = trim($this->Andar);
+
+        if($this->Andar == ''){
+            return false;
+        }
+
+        $sql    = "
+                    SELECT
+                        Q.QuartoId
+                        ,Q.Identificacao AS Quarto
+                    FROM
+                        quarto Q
+                    WHERE
+                        Q.Andar = '".$this->Andar."'
+                    ORDER BY
+                        Quarto
+                    ";
+
+        $query  = $this->db->query($sql);
+
+        $dados = $query->result();
+
+        if(count($dados) > 0){
+            return $dados;
+        }
+        else{
+            return false;
+        }
+    }
+
     public function setQuarto(){
 
         $this->Andar            = trim($this->Andar);
