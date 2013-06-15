@@ -11,5 +11,12 @@
 		<script type="text/javascript" src="<?php echo BASE_URL;?>/web/js/jquery/jquery.blockUI.js"></script>
 		<script type="text/javascript" src="<?php echo BASE_URL;?>/web/js/jquery/jquery.tablesorter.min.js"></script>
 		<script type="text/javascript" src="<?php echo BASE_URL;?>/web/js/global.php"></script>
+		<?php
+			if(isset($Script)){
+				foreach ($Script as $Registro) {
+					echo '<script type="text/javascript" src="'.BASE_URL.'/web/js/'.$Registro.'"></script>';
+				}
+			}
+		?>
 	</head>
 	<body>

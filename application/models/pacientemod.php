@@ -85,5 +85,41 @@ class PacienteMod extends CI_Model{
         }
     }
 
+    public function getPaciente(){
+        if(!is_numeric($this->Cpf)){
+            echo '{"success": false, "msg": "Favor recarregar a página!" }';
+            exit;
+        }
+
+        $sql    = "
+                    SELECT
+                        P.PacienteId
+                    FROM
+                        paciente P
+                    WHERE
+                        P.Cpf = ".$this->Cpf."
+                    ";
+
+        $query  = $this->db->query($sql);
+
+        $dados = $query->result();
+
+        if(count($dados) > 0){
+            echo '{"success": true, "url": "editar", "PacienteId": '.$dados[0]->PacienteId.', "msg": "Redirecionando para os dados do Paciente!" }';
+            exit;
+        }
+        else{
+            echo '{"success": true, "url": "cadastro", "msg": "Redirecionando para o cadastro de Paciente!" }';
+            exit;
+        }
+    }
+
+    public function getDadosPaciente(){
+        if(!is_numeric($this->PacienteId)){
+            return false;
+        }
+
+        
+    }
 }
 ?>
