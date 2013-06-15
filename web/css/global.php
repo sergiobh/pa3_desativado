@@ -62,7 +62,7 @@ body{
 .middle .menu_header .menu_content .botao .menu_text{
 	display: block;
 	cursor: pointer;
-	padding: 26px 37px 30px 37px;
+	padding: 26px 58px 30px 58px;
 	/*padding-top: 26px;*/
 	font-family: "Lucida Grande","Lucida Sans Unicode","Helvetica","Arial","Verdana","sans-serif";
 	font-size: 14px;
