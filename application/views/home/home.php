@@ -8,9 +8,8 @@
 		$FecharDiv  = false;
 
 		foreach($Leitos as $Registro) {
-//echo '<br />foreach = '.$i++;
+
 			if($Andar != $Registro->Andar){
-//echo '<br />Andar diferente: '.$Andar.' e '.$Registro->Andar;
 				if($Andar != ''){
 					echo '</div></div>';
 				}
@@ -25,7 +24,6 @@
 
 
 			if($Quarto != $Registro->Quarto){
-//echo '<br />Quarto diferente: '.$Quarto.' e '.$Registro->Quarto;
 				if($Quarto != ''){
 					echo '</div>';
 				}
@@ -37,13 +35,7 @@
 				$FecharDiv = true;
 			}
 
-
-
 			echo '<div class="home_leito_item '.$Registro->Status.'">Leito: '.$Registro->Leito.'</div>';
-
-
-
-
 
 		}
 			
@@ -53,5 +45,15 @@
 		// Fecha div home_andar
 		echo '</div>';
 	?>
+
+	<div class="clear"></div>
+
+	<div class='legenda home_andar'>
+		<div class='home_andar_item'>Legenda:</div>
+		<div class='home_leito_item Liberado'>Liberado</div>	<div class="clear"></div>
+		<div class='home_leito_item Arrumacao'>Arrumação</div>	<div class="clear"></div>
+		<div class='home_leito_item Ocupado'>Ocupado</div>	<div class="clear"></div>
+	</div>
+
 	<div class="clear"></div>
 </div>
