@@ -200,6 +200,10 @@ td input{
 	width: 100px;
 	margin-top: 20px;
 }
+.add_telefone,
+.del_telefone{
+	width: 100px;
+}
 .botao_reset,
 .botao_reset{
 	margin-left: 15px;

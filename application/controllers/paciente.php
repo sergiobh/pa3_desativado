@@ -4,6 +4,7 @@ class Paciente extends CI_Controller {
 
 	public function cadastrar()
 	{
+		$Dados['Script'][]				= 'jquery/jquery.maskedinput.js';
 
 		$Dados['View'] 					= 'paciente/cadastrar';
 		$this->load->view('body/index', $Dados);
