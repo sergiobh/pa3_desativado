@@ -4,7 +4,10 @@ class Ocupacao extends CI_Controller {
 
 	public function cadastrar()
 	{
+		$this->load->model('PacienteMod');
+		$Pacientes 							= $this->PacienteMod->FilaEspera();
 
+		$Dados['Pacientes'] 				= $Pacientes;
 		$Dados['View'] 						= 'ocupacao/cadastrar';
 		$this->load->view('body/index', $Dados);
 	}

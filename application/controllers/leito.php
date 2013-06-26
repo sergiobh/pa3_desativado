@@ -71,4 +71,11 @@ class Leito extends CI_Controller {
 		$this->LeitoMod->Status			= $Status;
 		$this->LeitoMod->setEdicao();
 	}
+
+	public function getLeitos(){
+
+echo 'Falta fazer!!!!!';
+
+
+	}
 }

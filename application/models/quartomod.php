@@ -5,7 +5,7 @@ class QuartoMod extends CI_Model{
     public $Andar;
     public $Identificacao;
     public $Status;
-
+    public $Ocupacao;
 
     public function Listar(){
         $sql    = "
@@ -38,13 +38,55 @@ class QuartoMod extends CI_Model{
     }
 
     public function getAndar(){
+        $sql_column    = '';
+        $sql_from      = '';
+        $sql_where     = '';
+        $sql_having    = '';
+
+        if($this->Ocupacao == 1 && is_numeric($this->PacienteId)){
+
+            $this->load->model('PacienteMod');
+            $this->PacienteMod->PacienteId      = $this->PacienteId;
+            $Paciente                           = $this->PacienteMod->getDadosPaciente();
+
+            if($Paciente){
+                $sql_column     = "
+                                    ,O.LeitoId AS Ocupacao
+                                    ";
+
+                $sql_having     = "
+                                    HAVING
+                                        O.LeitoId IS NULL
+                                    ";
+
+                $sql_from       = "
+                                    INNER JOIN leito L ON L.QuartoId = Q.QuartoId
+                                    LEFT JOIN ocupacao O ON O.LeitoId = L.LeitoId AND O.FuncBaixa IS NULL
+                                    ";
+
+                $sql_where      = "
+                                    WHERE
+                                        Q.Status = 1
+                                        AND L.Status = 1
+                                    ";
+            }
+            else{
+                // Retornar inválido!
+                return false;
+            }
+        }
+
         $sql    = "
                     SELECT
                         Q.Andar
+                        ".$sql_column."
                     FROM
                         quarto Q
+                        ".$sql_from."
+                    ".$sql_where."
                     GROUP BY
                         Q.Andar
+                    ".$sql_having."
                     ORDER BY
                         Q.Andar
                     ";
@@ -54,6 +96,14 @@ class QuartoMod extends CI_Model{
         $dados = $query->result();
 
         if(count($dados) > 0){
+
+
+
+
+            // Inserir regra de negocio aqui!!!!
+
+
+
             return $dados;
         }
         else{
@@ -68,14 +118,59 @@ class QuartoMod extends CI_Model{
             return false;
         }
 
+        $sql_column    = '';
+        $sql_from      = '';
+        $sql_where     = '';
+        $sql_having    = '';
+
+        if($this->Ocupacao == 1 && is_numeric($this->PacienteId)){
+
+            $this->load->model('PacienteMod');
+            $this->PacienteMod->PacienteId      = $this->PacienteId;
+            $Paciente                           = $this->PacienteMod->getDadosPaciente();
+
+            if($Paciente){
+                $sql_column     = "
+                                    ,O.LeitoId AS Ocupacao
+                                    ";
+
+                $sql_having     = "
+                                    HAVING
+                                        O.LeitoId IS NULL
+                                    ";
+
+                $sql_from       = "
+                                    INNER JOIN leito L ON L.QuartoId = Q.QuartoId
+                                    LEFT JOIN ocupacao O ON O.LeitoId = L.LeitoId AND O.FuncBaixa IS NULL
+                                    ";
+
+                $sql_where      = "
+                                    AND Q.Status = 1
+                                    AND L.Status = 1
+                                    ";
+            }
+            else{
+                // Retornar inválido!
+                return false;
+            }
+        }
+
+
+
         $sql    = "
                     SELECT
                         Q.QuartoId
                         ,Q.Identificacao AS Quarto
+                        ".$sql_column."
                     FROM
                         quarto Q
+                        ".$sql_from."
                     WHERE
                         Q.Andar = '".$this->Andar."'
+                        ".$sql_where."
+                    GROUP BY
+                        Q.QuartoId
+                    ".$sql_having."
                     ORDER BY
                         Quarto
                     ";
@@ -85,7 +180,36 @@ class QuartoMod extends CI_Model{
         $dados = $query->result();
 
         if(count($dados) > 0){
-            return $dados;
+            if($this->Ocupacao == 1 && is_numeric($this->PacienteId)){
+                // Apartamento
+                /*
+                /* Regra só pode ter um leito no quarto ativo e disponivel
+                */
+                if($Paciente->Tipo == 1){
+                    
+
+                    //echo 'Tipo 1';
+
+
+                }
+                // Enfermaria
+                /*
+                /* Regra ter leito no quarto ativo e disponivel
+                */
+                else if($Paciente->Tipo == 2){
+                    
+
+                    //echo 'Tipo 2';
+
+
+                }
+
+// deletar
+                return $dados;
+            }
+            else{
+                return $dados;
+            }
         }
         else{
             return false;

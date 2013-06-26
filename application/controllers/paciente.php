@@ -10,6 +10,38 @@ class Paciente extends CI_Controller {
 		$this->load->view('body/index', $Dados);
 	}
 
+	public function salvarCadastro(){
+
+		$Bairro 						= $this->input->post("Bairro");
+		$Cidade 						= $this->input->post("Cidade");
+		$Complemento 					= $this->input->post("Complemento");
+		$Cpf 							= $this->input->post("Cpf");
+		$Estado 						= $this->input->post("Estado");
+		$Logradouro 					= $this->input->post("Logradouro");
+		$Nome 							= $this->input->post("Nome");
+		$Numero 						= $this->input->post("Numero");
+		$QtdTelefone 					= $this->input->post("QtdTelefone");
+		$Sexo 							= $this->input->post("Sexo");
+		$Telefone 						= $this->input->post("Telefone");
+		$Tipo 							= $this->input->post("Tipo");
+
+		$this->load->model('PacienteMod');
+		$this->PacienteMod->Bairro		= $Bairro;
+		$this->PacienteMod->Cidade		= $Cidade;
+		$this->PacienteMod->Complemento	= $Complemento;
+		$this->PacienteMod->Cpf			= $Cpf;
+		$this->PacienteMod->Estado		= $Estado;
+		$this->PacienteMod->Logradouro	= $Logradouro;
+		$this->PacienteMod->Nome		= $Nome;
+		$this->PacienteMod->Numero		= $Numero;
+		//$this->PacienteMod->QtdTelefone	= $QtdTelefone;
+		$this->PacienteMod->Sexo		= $Sexo;
+		$this->PacienteMod->Telefone	= $Telefone;
+		$this->PacienteMod->Tipo		= $Tipo;
+
+		$Pacientes 						= $this->PacienteMod->SalvarCadastro();
+	}
+
 	public function painel(){
 
 		$this->load->model('PacienteMod');
@@ -61,7 +93,7 @@ class Paciente extends CI_Controller {
 	}
 
 	public function editar(){
-		$PacienteId 					= $this->input->post("PacienteId");		
+		$PacienteId 					= $this->input->post("PacienteId");
 
 		$this->load->model('PacienteMod');
 		$this->PacienteMod->PacienteId	= $PacienteId;

@@ -10,7 +10,7 @@
 			<tr>
 				<td>Plano:</td>
 				<td>
-					<select name="tipo" descricao = "plano" obrigatorio = 'sim'>
+					<select name="tipo" descricao = "plano" id='tipo' obrigatorio = 'sim'>
 						<option value="-1">--- Selecione ---</option>
 						<option value="1">Apartamento</option>
 						<option value="2">Enfermária</option>
@@ -71,7 +71,10 @@
 			</tr>
 			<tr>
 				<td>Contatos:</td>
-				<td><input class='add_telefone' type = 'button' value = 'Adicionar' /></td>
+				<td>
+					<input class='add_telefone' type = 'button' value = 'Adicionar' />
+					<input type="hidden" name="QtdTelefone" value="0" id="QtdTelefone">
+				</td>
 				<td></td>
 			</tr>
 			<tr class='tr_botoes'>
@@ -85,10 +88,17 @@
 		</table>
 	</form>
 	<script type="text/javascript">
-		var QtdTelefone = 0;
+		var Telefones = [];
 
 		function AddTelefone(){
+			var QtdTelefone = $("#QtdTelefone").val();
+
 			QtdTelefone++;
+
+			$("#QtdTelefone").val(QtdTelefone);
+
+			// Adiciona o Telefone no array
+			Telefones.push(QtdTelefone);
 
 			var AddTelefone = "<tr class='linha_telefone linha_telefone"+QtdTelefone+"'><td>Telefone"+QtdTelefone+":</td><td><input type = 'text' maxlength = '14' name = 'telefone"+QtdTelefone+"' descricao = 'telefone"+QtdTelefone+"' class='telefone' id = 'telefone"+QtdTelefone+"' obrigatorio = 'sim' /></td><td><input class='del_telefone' onclick='DelTelefone("+QtdTelefone+")' type = 'button' value = 'Remover' /></td></tr>";
 
@@ -101,6 +111,12 @@
 			var Qtd = $(".linha_telefone").size();
 
 			if(Qtd > 1){
+				// Pego a posição do Telefone passado para deletar
+				var Posicao = Telefones.indexOf(Telefone);
+
+				// Removo a posição passada do array
+				Telefones.splice(Posicao, 1);
+
 				$(".linha_telefone"+Telefone).remove();
 			}
 			else{
@@ -139,23 +155,42 @@
 				var Tipo 			= $("#tipo").val();
 				var Sexo 			= $("#sexo").val();
 				var Cpf 			= $("#cpf").val();
+
+				Cpf 				= Cpf.replace('.','');
+				Cpf 				= Cpf.replace('.','');
+				Cpf 				= Cpf.replace('-','');
+
 				var Logradouro		= $("#logradouro").val();
 				var Numero  		= $("#numero").val();
 				var Complemento 	= $("#complemento").val();
 				var Bairro  		= $("#bairro").val();
 				var Cidade  		= $("#cidade").val();
 				var Estado  		= $("#estado").val();
-				
+				var QtdTelefone 	= $("#QtdTelefone").val();
 				// criar variavel para enviar o post de telefone
+				var Telefone  		= [];
 
-
-
+				// Preenche o array de telefones
+				for(var i = 0; i < Telefones.length; i++){
+					Telefone.push($('#telefone'+Telefones[i]).val());
+				}
 
 
 				// Executa o POST usando metodo AJAX e retorando Json
 				var Url				= '<?php echo BASE_URL;?>/paciente/salvarCadastro';
 
-				var data 			= 'Andar='+Andar+'&Identificacao='+Identificacao;
+				var data 			= 'Nome='+Nome
+										+'&Tipo='+Tipo
+										+'&Sexo='+Sexo
+										+'&Cpf='+Cpf
+										+'&Logradouro='+Logradouro
+										+'&Numero='+Numero
+										+'&Complemento='+Complemento
+										+'&Bairro='+Bairro
+										+'&Cidade='+Cidade
+										+'&Estado='+Estado
+										+'&Telefone='+Telefone
+										+'&QtdTelefone='+QtdTelefone;
 
 				$.blockUI({ message: '<h1>Salvando os dados...</h1>' });
 
@@ -169,10 +204,12 @@
 				
 							$.blockUI({ message: '<h3>'+retorno.msg+'</h3>' });
 
+							var PacienteId = retorno.PacienteId;
+
 							// Efetuar o redirecionamento
 							setTimeout(
 								function(){
-									window.location = "<?php echo BASE_URL;?>/quarto/listar"
+									window.location = "<?php echo BASE_URL;?>/ocupacao/cadastrar/"+PacienteId
 								},
 								4000
 							);
@@ -180,7 +217,14 @@
 						else{
 							// Se php retornou erro irá salvar o retorno da div "retorno"
 							$('.retorno_ajax').html(retorno.msg);
-							$.unblockUI();
+
+							// Efetuar o redirecionamento
+							setTimeout(
+								function(){
+									window.location = "<?php echo BASE_URL;?>/paciente/consultar"
+								},
+								4000
+							);
 						}
 					},
 					error: function(){

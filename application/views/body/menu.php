@@ -41,10 +41,6 @@
                     <a href="<?php echo BASE_URL;?>/paciente/painel">
                         <div class='submenu_item'>Painel de pacientes</div>
                     </a>
-                    <a href="<?php echo BASE_URL;?>/paciente/cadastrar">
-                        <div class='submenu_item'>Cadastrar pacientes</div>
-                    </a>                    
-                    
                     <a href="<?php echo BASE_URL;?>/paciente/consultar">
                         <div class='submenu_item submenu_primeiro'>Consultar</div>
                     </a>

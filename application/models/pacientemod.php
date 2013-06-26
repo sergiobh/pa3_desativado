@@ -4,6 +4,7 @@ class PacienteMod extends CI_Model{
     public $OcupacaoId;
     public $PacienteId;
     public $Nome;
+    public $Sexo;
     public $Cpf;
     public $Logradouro;
     public $Numero;
@@ -14,6 +15,7 @@ class PacienteMod extends CI_Model{
     public $Tipo;
     public $Status;
     public $DataHora;
+    public $Telefone;
 
     public function Listar(){
         $sql    = "
@@ -85,10 +87,15 @@ class PacienteMod extends CI_Model{
         }
     }
 
-    public function getPaciente(){
-        if(!is_numeric($this->Cpf)){
-            echo '{"success": false, "msg": "Favor recarregar a página!" }';
-            exit;
+    public function getPaciente($Externo = true){
+        if(!is_numeric($this->Cpf)){            
+            if($Externo){
+                echo '{"success": false, "msg": "Favor recarregar a página!" }';
+                exit;
+            }
+            else{
+                return false;
+            }
         }
 
         $sql    = "
@@ -105,12 +112,22 @@ class PacienteMod extends CI_Model{
         $dados = $query->result();
 
         if(count($dados) > 0){
-            echo '{"success": true, "url": "editar", "PacienteId": '.$dados[0]->PacienteId.', "msg": "Redirecionando para os dados do Paciente!" }';
-            exit;
+            if($Externo){
+                echo '{"success": true, "url": "editar", "PacienteId": '.$dados[0]->PacienteId.', "msg": "Redirecionando para os dados do Paciente!" }';
+                exit;
+            }
+            else{
+                return true;
+            }
         }
         else{
-            echo '{"success": true, "url": "cadastro", "msg": "Redirecionando para o cadastro de Paciente!" }';
-            exit;
+            if($Externo){
+                echo '{"success": true, "url": "cadastro", "msg": "Redirecionando para o cadastro de Paciente!" }';
+                exit;
+            }
+            else{
+                return false;
+            }
         }
     }
 
@@ -119,7 +136,108 @@ class PacienteMod extends CI_Model{
             return false;
         }
 
-        
+        $sql    = "
+                    SELECT
+                        P.*
+                        ,GROUP_CONCAT(Telefone) AS TelefonesAgrupados
+                    FROM
+                        paciente P
+                        LEFT JOIN telefone T ON T.PacienteId = P.PacienteId
+                    WHERE
+                        P.PacienteId = '".$this->PacienteId."'
+                    ";
+
+        $query  = $this->db->query($sql);
+
+        $dados = $query->result();
+
+        if(count($dados) > 0){
+            $Telefones              = explode(',', $dados[0]->TelefonesAgrupados);
+
+            unset($dados[0]->TelefonesAgrupados);
+
+            $dados[0]->Telefones    = $Telefones;
+
+            $dados[0]->Cpf          = $this->setMascaraCpf($dados[0]->Cpf);
+
+            return $dados[0];
+        }
+        else{
+            return false;
+        }
+    }
+
+    private function setMascaraCpf($Cpf){
+        return substr($Cpf, 0, 3).'.'.substr($Cpf, 3, 3).'.'.substr($Cpf, 6, 3).'-'.substr($Cpf, -2);
+    }
+
+    public function SalvarCadastro(){
+        if($this->getPaciente(false)){
+            echo '{"success": false, "msg": "Paciente já cadastrado!" }';
+            exit;
+        }
+
+        $sql    = "
+                    INSERT INTO
+                    paciente(
+                        Nome
+                        ,Sexo
+                        ,Cpf
+                        ,Logradouro
+                        ,Numero
+                        ,Complemento
+                        ,Bairro
+                        ,Cidade
+                        ,Estado
+                        ,Tipo
+                        ,DataHora
+                    )
+                    VALUES(
+                        '".$this->Nome."'
+                        ,'".$this->Sexo."'
+                        ,'".$this->Cpf."'
+                        ,'".$this->Logradouro."'
+                        ,'".$this->Numero."'
+                        ,'".$this->Complemento."'
+                        ,'".$this->Bairro."'
+                        ,'".$this->Cidade."'
+                        ,'".$this->Estado."'
+                        ,'".$this->Tipo."'
+                        ,NOW()
+                    )";
+
+        $this->db->query($sql);
+
+        if($this->db->affected_rows() > 0){
+            $this->PacienteId = $this->db->insert_id();
+
+            // Grava telefone
+            $this->setTelefone();
+
+            echo '{"success": true, "PacienteId": "'.$this->PacienteId.'", "msg": "Paciente já cadastrado!" }';
+        }
+        else{
+            echo '{"success": false, "msg": "Favor recarregar a página!" }';
+        }
+    }
+
+    public function setTelefone(){
+        $Telefones          = explode(',', $this->Telefone);
+
+        foreach ($Telefones as $key => $Telefone) {
+            $sql    = "
+                        INSERT INTO
+                        telefone(
+                            PacienteId
+                            ,Telefone
+                        )
+                        VALUES(
+                            '".$this->PacienteId."'
+                            ,'".$Telefone."'
+                        )";            
+
+            $this->db->query($sql);
+        }
     }
 }
 ?>
