@@ -239,5 +239,48 @@ class PacienteMod extends CI_Model{
             $this->db->query($sql);
         }
     }
+
+    public function delTelefone(){
+        $sql    = "
+                    DELETE
+                    FROM
+                        telefone
+                    WHERE
+                        PacienteId = '".$this->PacienteId."'
+                ";
+
+        $this->db->query($sql);
+    }
+
+    public function SalvarEdicao(){
+        $sql    = "
+                    UPDATE
+                        paciente
+                    SET
+                        Nome = '".$this->Nome."'
+                        ,Sexo = '".$this->Sexo."'
+                        ,Cpf = '".$this->Cpf."'
+                        ,Logradouro = '".$this->Logradouro."'
+                        ,Numero = '".$this->Numero."'
+                        ,Complemento = '".$this->Complemento."'
+                        ,Bairro = '".$this->Bairro."'
+                        ,Cidade = '".$this->Cidade."'
+                        ,Estado = '".$this->Estado."'
+                        ,Tipo = '".$this->Tipo."'
+                        ,DataHora = NOW()
+                    WHERE
+                        PacienteId = '".$this->PacienteId."'
+                    ";
+
+        $this->db->query($sql);
+
+        // Deleta todos telefones p/ inseri-los novamente
+        $this->delTelefone();
+
+        // Grava telefone
+        $this->setTelefone();
+
+        echo '{"success": true, "msg": "Paciente salvo com sucesso!" }';
+    }
 }
 ?>
