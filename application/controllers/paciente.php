@@ -118,6 +118,7 @@ class Paciente extends CI_Controller {
 		$Numero 						= $this->input->post("Numero");
 		$QtdTelefone 					= $this->input->post("QtdTelefone");
 		$Sexo 							= $this->input->post("Sexo");
+		$Status 						= $this->input->post("Status");
 		$Telefone 						= $this->input->post("Telefone");
 		$Tipo 							= $this->input->post("Tipo");
 
@@ -133,6 +134,7 @@ class Paciente extends CI_Controller {
 		$this->PacienteMod->Numero		= $Numero;
 		//$this->PacienteMod->QtdTelefone	= $QtdTelefone;
 		$this->PacienteMod->Sexo		= $Sexo;
+		$this->PacienteMod->Status		= $Status;
 		$this->PacienteMod->Telefone	= $Telefone;
 		$this->PacienteMod->Tipo		= $Tipo;
 

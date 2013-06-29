@@ -51,12 +51,9 @@ class QuartoMod extends CI_Model{
 
             if($Paciente){
                 $sql_column     = "
-                                    ,O.LeitoId AS Ocupacao
-                                    ";
-
-                $sql_having     = "
-                                    HAVING
-                                        O.LeitoId IS NULL
+                                    ,L.QuartoId
+                                    ,COUNT(L.LeitoId) AS QtdLeitos
+                                    ,GROUP_CONCAT(L.LeitoId) AS Leitos
                                     ";
 
                 $sql_from       = "
@@ -67,13 +64,28 @@ class QuartoMod extends CI_Model{
                 $sql_where      = "
                                     WHERE
                                         Q.Status = 1
-                                        AND L.Status = 1
+                                        AND L.Status != 0
                                     ";
+
+                $sql_group_by   = "
+                                    L.QuartoId
+                                    ,Q.Andar
+                                    ";
+
+                if($Paciente->Tipo == 1){
+                    $sql_having     = "
+                                        HAVING
+                                            QtdLeitos = 1
+                                        ";
+                }
             }
             else{
                 // Retornar inválido!
                 return false;
             }
+        }
+        else{
+            $sql_group_by       = "Q.Andar";
         }
 
         $sql    = "
@@ -85,7 +97,7 @@ class QuartoMod extends CI_Model{
                         ".$sql_from."
                     ".$sql_where."
                     GROUP BY
-                        Q.Andar
+                        ".$sql_group_by."
                     ".$sql_having."
                     ORDER BY
                         Q.Andar
@@ -96,15 +108,19 @@ class QuartoMod extends CI_Model{
         $dados = $query->result();
 
         if(count($dados) > 0){
+            $Retorno        = '';
+            $Ultimo         = '';
 
+            // Verifica se possui mais de um Andar
+            foreach ($dados as $key => $value) {
+                if($Ultimo != $value->Andar){
+                    $Retorno[]      = $value;
 
+                    $Ultimo         = $value->Andar;
+                }
+            }
 
-
-            // Inserir regra de negocio aqui!!!!
-
-
-
-            return $dados;
+            return $Retorno;
         }
         else{
             return false;

@@ -20,4 +20,14 @@ class Ocupacao extends CI_Controller {
 		$this->OcupacaoMod->OcupacaoId 		= $OcupacaoId;
 		$this->OcupacaoMod->BaixaOcupacao();
 	}
+
+	public function salvarCadastro(){
+		$PacienteId							= $this->input->post("PacienteId");
+		$LeitoId							= $this->input->post("LeitoId");
+
+		$this->load->model('OcupacaoMod');
+		$this->OcupacaoMod->PacienteId 		= $PacienteId;
+		$this->OcupacaoMod->LeitoId 		= $LeitoId;		
+		$this->OcupacaoMod->salvarCadastro();
+	}
 }

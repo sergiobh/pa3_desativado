@@ -140,9 +140,11 @@ class PacienteMod extends CI_Model{
                     SELECT
                         P.*
                         ,GROUP_CONCAT(Telefone) AS TelefonesAgrupados
+                        ,IF(O.FuncBaixa IS NULL, '0', '1') AS Ocupacao
                     FROM
                         paciente P
                         LEFT JOIN telefone T ON T.PacienteId = P.PacienteId
+                        LEFT JOIN ocupacao O ON O.PacienteId = P.PacienteId AND O.FuncBaixa IS NULL
                     WHERE
                         P.PacienteId = '".$this->PacienteId."'
                     ";
@@ -259,6 +261,7 @@ class PacienteMod extends CI_Model{
                     SET
                         Nome = '".$this->Nome."'
                         ,Sexo = '".$this->Sexo."'
+                        ,Status = '".$this->Status."'
                         ,Cpf = '".$this->Cpf."'
                         ,Logradouro = '".$this->Logradouro."'
                         ,Numero = '".$this->Numero."'

@@ -226,6 +226,43 @@ class LeitoMod extends CI_Model{
         }
     }
 
+    public function getLeitos(){
+        if($this->QuartoId == ''){
+            echo '{"success": false, "msg": "Nenhum leito disponível!" }';
+            exit;
+        }
+
+        $sql        = "
+                        SELECT
+                                L.LeitoId
+                                ,L.Identificacao AS Leito
+                                ,COUNT(L.LeitoId) AS QtdLeitos
+                        FROM
+                                quarto Q
+                                INNER JOIN leito L ON L.QuartoId = Q.QuartoId
+                                LEFT JOIN ocupacao O ON O.LeitoId = L.LeitoId AND O.FuncBaixa IS NULL
+                        WHERE
+                                Q.Status = 1
+                                AND L.Status != 0
+                                AND L.QuartoId = '".$this->QuartoId."'
+                        ORDER BY
+                                Leito
+                        ";
+
+        $query  = $this->db->query($sql);
+
+        $dados = $query->result();
+
+        if(count($dados) > 0){
+            $Leitos     = json_encode($dados);
+
+            echo '{"success": true, "leitos": '.$Leitos.' }';
+        }
+        else{
+            echo '{"success": false, "msg": "Nenhum leito disponível!" }';
+        }
+    }
+
     private function getStatusAll(){
         $Item->Status   = 0;
         $Item->Nome     = 'Desativado';

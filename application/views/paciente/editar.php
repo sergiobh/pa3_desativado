@@ -3,6 +3,18 @@
 	<form class='formulario'>
 		<table cellspacing = "10" border = '0'>
 			<tr>
+				<td>Status:</td>
+				<td>
+					<select name="status" descricao = "status" id='status' obrigatorio = 'sim'>
+						<option value="1" <?php echo ($Paciente->Status == 1) ? 'selected="selected"' : '';?>>Presente</option>
+						<?php if($Paciente->Ocupacao == 0){ ?>
+							<option value="0" <?php echo ($Paciente->Status == 0) ? 'selected="selected"' : '';?>>Auta hospitalar</option>
+						<?php } ?>
+					</select>
+				</td>
+				<td></td>
+			</tr>
+			<tr>
 				<td>Nome:</td>
 				<td>
 					<input id = 'nome' type = 'text' maxlength = '100' name = 'nome' descricao = 'nome' obrigatorio = 'sim' value="<?php echo $Paciente->Nome;?>" />
@@ -168,6 +180,7 @@
 				}
 
 				// Declaração de variaveis
+				var Status 			= $("#status").val();
 				var Nome 			= $("#nome").val();
 				var Tipo 			= $("#tipo").val();
 				var Sexo 			= $("#sexo").val();
@@ -197,6 +210,7 @@
 				var Url				= '<?php echo BASE_URL;?>/paciente/salvarEdicao';
 
 				var data 			= 	'PacienteId='+<?php echo $Paciente->PacienteId;?>
+										+'&Status='+Status
 										+'&Nome='+Nome
 										+'&Tipo='+Tipo
 										+'&Sexo='+Sexo
@@ -227,7 +241,7 @@
 							// Efetuar o redirecionamento
 							setTimeout(
 								function(){
-									window.location = "<?php echo BASE_URL;?>/ocupacao/cadastrar/"+PacienteId
+									window.location = "<?php echo BASE_URL;?>/ocupacao/cadastrar";
 								},
 								4000
 							);
@@ -239,7 +253,7 @@
 							// Efetuar o redirecionamento
 							setTimeout(
 								function(){
-									window.location = "<?php echo BASE_URL;?>/paciente/consultar"
+									window.location = "<?php echo BASE_URL;?>/paciente/consultar";
 								},
 								4000
 							);

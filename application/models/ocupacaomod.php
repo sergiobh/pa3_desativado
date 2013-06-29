@@ -119,5 +119,42 @@ class OcupacaoMod extends CI_Model{
             echo '{"success": false, "msg": "Ocorreu um erro ao efetuar a baixa! Favor recarregar a página!" }';
         }
     }
+
+    public function salvarCadastro(){
+        if($this->PacienteId == '' || $this->LeitoId == ''){
+            echo '{"success": false, "msg": "Ocorreu um erro ao salvar, tente novamente!" }';
+            exit;
+        }
+
+        $FuncCadastro   = 1;
+        $DataCad        = date('Y-m-d');
+        $HoraCad        = date('H:i:s');
+
+        $sql        = "
+                        INSERT INTO
+                        ocupacao (
+                            LeitoId
+                            ,PacienteId
+                            ,FuncCadastro
+                            ,DataCad
+                            ,HoraCad
+                        )
+                        VALUES(
+                            ".$this->LeitoId."
+                            ,'".$this->PacienteId."'
+                            ,'".$FuncCadastro."'
+                            ,'".$DataCad."'
+                            ,'".$HoraCad."'
+                        )";
+
+        $this->db->query($sql);
+
+        if($this->db->affected_rows() > 0){
+            echo '{"success": true, "msg": "Dados salvos com sucesso!" }';
+        }
+        else{
+            echo '{"success": false, "msg": "Ocorreu um erro ao salvar, tente novamente!" }';
+        }
+    }
 }
 ?>

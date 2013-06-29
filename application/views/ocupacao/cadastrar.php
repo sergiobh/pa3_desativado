@@ -134,7 +134,7 @@
 
 
 					var Url		= '<?php echo BASE_URL;?>/leito/getLeitos';
-					var data 	= 'LeitoId='+LeitoId
+					var data 	= 'QuartoId='+QuartoId
 									+'&Ocupacao=1'
 									+'&PacienteId='+PacienteId;
 
@@ -143,10 +143,24 @@
 					$.ajax({
 						type: "POST",
 						url: Url,
-						data: data,					
+						data: data,		
+						dataType: 'json',			
 						success: function(retorno){
-							$('#LeitoId').html('<option value="-1">--- Selecione ---</option>' + retorno);
-							$.unblockUI();
+							
+							if(retorno.success){
+								var Opcoes = '';
+
+								for (var i = 0; i < retorno.leitos.length; i++) {
+									Opcoes  += "<option value="+retorno.leitos[i].LeitoId+">"+retorno.leitos[i].Leito+"</option>";
+								}
+
+								$('#LeitoId').html('<option value="-1">--- Selecione ---</option>' + Opcoes);
+								$.unblockUI();
+							}
+							else{
+								$('.retorno_ajax').html(retorno.msg);
+								$.unblockUI();
+							}
 						},
 						error: function(){
 							$('.retorno_ajax').html('Ocorreu um erro no servidor. Favor recarregar a página!');
@@ -165,13 +179,13 @@
 				}
 
 				// Declaração de variaveis
-				var Identificacao 	= $("#Identificacao").val();
-				var QuartoId		= $("#QuartoId option:selected").val();
+				var PacienteId 		= $("#PacienteId option:selected").val();
+				var LeitoId			= $("#LeitoId option:selected").val();
 
 				// Executa o POST usando metodo AJAX e retorando Json
-				var Url				= '<?php echo BASE_URL;?>/leito/salvarCadastro';
+				var Url				= '<?php echo BASE_URL;?>/Ocupacao/salvarCadastro';
 
-				var data 			= 'QuartoId='+QuartoId+'&Identificacao='+Identificacao;
+				var data 			= 'LeitoId='+LeitoId+'&PacienteId='+PacienteId;
 
 				$.blockUI({ message: '<h1>Salvando os dados...</h1>' });
 
@@ -182,15 +196,13 @@
 					dataType: 'json',
 					success: function(retorno){
 						if(retorno.success){
-							// Se retorno do php Deu OK
-							//$('.retorno').html(retorno.msg);
 				
 							$.blockUI({ message: '<h3>'+retorno.msg+'</h3>' });
 
 							// Efetuar o redirecionamento
 							setTimeout(
 								function(){
-									window.location = "<?php echo BASE_URL;?>/leito/listar"
+									window.location = "<?php echo BASE_URL;?>/paciente/painel"
 								},
 								4000
 							);
