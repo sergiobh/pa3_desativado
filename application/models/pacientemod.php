@@ -282,5 +282,30 @@ class PacienteMod extends CI_Model{
 
         echo '{"success": true, "msg": "Paciente salvo com sucesso!" }';
     }
+
+    public function EfetuaBaixa(){
+        if($this->PacienteId == ''){
+            echo '{"success": false, "msg": "Favor recarregar a página!" }';
+            exit;
+        }
+
+        $sql    = "
+                    UPDATE
+                        paciente
+                    SET
+                        Status = 0
+                    WHERE
+                        PacienteId = '".$this->PacienteId."'
+                    ";
+
+        $this->db->query($sql);
+
+        if($this->db->affected_rows() > 0){
+            echo '{"success": true, "msg": "Paciente liberado para a auta!" }';
+        }
+        else{
+            echo '{"success": false, "msg": "Ocorreu um erro ao efetuar a baixa. Edite o Paciente!" }';
+        }
+    }
 }
 ?>

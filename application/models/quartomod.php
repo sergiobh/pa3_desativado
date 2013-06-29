@@ -362,7 +362,7 @@ class QuartoMod extends CI_Model{
         }
     }
 
-    public function getStatusAll(){
+    private function getStatusAll(){
         $Item->Status   = 0;
         $Item->Nome     = 'Desativado';
         $Status[]       = $Item;

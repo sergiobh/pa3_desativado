@@ -138,4 +138,12 @@ class Paciente extends CI_Controller {
 
 		$Pacientes 						= $this->PacienteMod->SalvarEdicao();
 	}
+
+	public function EfetuarBaixa(){
+		$PacienteId 					= $this->input->post("PacienteId");
+
+		$this->load->model('PacienteMod');
+		$this->PacienteMod->PacienteId	= $PacienteId;
+		$this->PacienteMod->EfetuaBaixa();
+	}
 }

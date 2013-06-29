@@ -14,14 +14,10 @@ class Ocupacao extends CI_Controller {
 
 	public function desocupar(){
 
+		$OcupacaoId							= $this->input->post("OcupacaoId");
+
 		$this->load->model('OcupacaoMod');
-		$Pacientes 							= $this->OcupacaoMod->ListarPacientes();
-		$Dados['Pacientes'] 				= $Pacientes;
-
-		$Leitos 							= $this->OcupacaoMod->ListarLeitos();
-		$Dados['Leitos'] 				= $Leitos;
-
-		$Dados['View'] 						= 'ocupacao/desocupar';
-		$this->load->view('body/index', $Dados);
+		$this->OcupacaoMod->OcupacaoId 		= $OcupacaoId;
+		$this->OcupacaoMod->BaixaOcupacao();
 	}
 }
