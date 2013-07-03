@@ -6,8 +6,9 @@
 		$Andar		= '';
 		//$i = 1;
 		$FecharDiv  = false;
-
-		foreach($Leitos as $Registro) {
+		
+		if($Leitos){
+			foreach($Leitos as $Registro) {
 
 			if($Andar != $Registro->Andar){
 				if($Andar != ''){
@@ -37,6 +38,7 @@
 
 			echo '<div class="home_leito_item '.$Registro->Status.'">Leito: '.$Registro->Leito.'</div>';
 
+		}
 		}
 			
 		// Fecha div home_quarto

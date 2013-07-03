@@ -253,7 +253,7 @@ class QuartoMod extends CI_Model{
                                 ,Identificacao
                             )
                             VALUES(
-                                ".$this->Andar."
+                                '".$this->Andar."'
                                 ,'".$this->Identificacao."'
                             )";
 
@@ -283,7 +283,7 @@ class QuartoMod extends CI_Model{
                 FROM
                     quarto Q
                 WHERE
-                    Q.Andar = ".$this->Andar."
+                    Q.Andar = '".$this->Andar."'
                     AND Q.Identificacao = '".$this->Identificacao."'
                 ";
 

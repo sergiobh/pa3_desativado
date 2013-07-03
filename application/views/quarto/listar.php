@@ -6,7 +6,8 @@
 
 		$FecharDiv  = false;
 
-		foreach($Quartos as $Registro) {
+		if($Quartos){
+			foreach($Quartos as $Registro) {
 
 			if($Andar != $Registro->Andar){
 				if($Andar != ''){
@@ -25,7 +26,8 @@
 				echo '<div class="home_leito_item '.$Registro->Status.'">Quarto: '.$Registro->Quarto.'</div>';
 			echo '</a>';
 		}			
-
+		}
+		
 		// Fecha div home_andar
 		echo '</div>';
 	?>

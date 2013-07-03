@@ -38,7 +38,7 @@
 					<select name="sexo" id='sexo' descricao = "sexo" obrigatorio = 'sim'>
 						<option value="-1">--- Selecione ---</option>
 						<option value="1" <?php echo ($Paciente->Sexo == 1) ? 'selected="selected"' : '';?>>Masculino</option>
-						<option value="2" <?php echo ($Paciente->Tipo == 2) ? 'selected="selected"' : '';?>>Feminino</option>
+						<option value="2" <?php echo ($Paciente->Sexo == 2) ? 'selected="selected"' : '';?>>Feminino</option>
 					</select>
 				</td>
 				<td></td>

@@ -7,7 +7,8 @@
 
 		$FecharDiv  = false;
 
-		foreach($Leitos as $Registro) {
+		if($Leitos){
+			foreach($Leitos as $Registro) {
 
 			if($Andar != $Registro->Andar){
 				if($Andar != ''){
@@ -40,6 +41,7 @@
 			echo '<a class="link_leito" href="'.BASE_URL.'/leito/editar/'.$Registro->LeitoId.'" title="Editar '.$Registro->Leito.'" >';
 				echo '<div class="home_leito_item '.$Registro->Status.'">Leito: '.$Registro->Leito.'</div>';
 			echo '</a>';
+		}
 		}
 			
 		// Fecha div home_quarto
