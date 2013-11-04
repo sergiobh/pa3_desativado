@@ -92,6 +92,7 @@ function validaDados2(formulario){
 
 			switch(Tipo){
 				case 'text':
+				case 'password':
 					if(elementos[i].value == ''){
 						msg += 'O campo ' + elementos[i].getAttribute('descricao') + ' é obrigatório <br />';
 

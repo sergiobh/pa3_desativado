@@ -5,6 +5,31 @@ class FuncionarioMod extends CI_Model{
     public $Nome;
     public $Cpf;
     public $Senha;
+    public $GrupoId;
+
+    public function getFuncionario(){
+
+        $sql    = "
+                    SELECT
+                        F.FuncionarioId
+                    FROM
+                        funcionario F
+                    WHERE
+                        F.Cpf = ".$this->Cpf."
+                    ";
+
+        $query  = $this->db->query($sql);
+
+        $dados = $query->result();
+
+        if(count($dados) > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
 
     public function Listar(){
         $sql    = "
@@ -28,6 +53,43 @@ class FuncionarioMod extends CI_Model{
         else{
             return false;
         }
+    }
+
+    public function SalvarCadastro(){
+        if($this->getFuncionario()){
+            $Retorno->Status = false;
+            $Retorno->Msg    = "Funcionario já cadastrado!";
+            
+            return $Retorno;
+        }
+
+        $sql    = "
+                    INSERT INTO
+                    funcionario(
+                        Nome
+                        ,Cpf
+                        ,Senha
+                        ,GrupoId
+                    )
+                    VALUES(
+                        '".$this->Nome."'
+                        ,'".$this->Cpf."'
+                        ,'".$this->Senha."'
+                        ,'".$this->GrupoId."'
+                    )";
+
+        $this->db->query($sql);
+
+        if($this->db->affected_rows() > 0){
+            $Retorno->Status = true;
+            $Retorno->Msg    = "Funcionario cadastrado!";
+        }
+        else{
+            $Retorno->Status = false;
+            $Retorno->Msg    = "Favor recarregar a página!";
+        }
+
+        return $Retorno;
     }
 }
 ?>
