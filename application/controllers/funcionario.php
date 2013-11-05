@@ -10,11 +10,6 @@ class Funcionario extends CI_Controller {
 	}
 
 	public function listar(){
-
-		$this->load->model('FuncionarioMod');
-		$Funcionarios 						= $this->FuncionarioMod->Listar();
-		$Dados['Funcionarios'] 				= $Funcionarios;
-
 		$Dados['View'] 						= 'funcionario/listar';
 		$this->load->view('body/index', $Dados);
 	}
@@ -27,7 +22,6 @@ class Funcionario extends CI_Controller {
 	public function salvarCadastro(){
 //$RETORNO['A'] = $_SERVER['REQUEST_METHOD'];
 //$RETORNO['B'] = $id;
-		
 
 		$Nome			= $this->input->post('Nome');
 		$Cpf   			= $this->input->post('Cpf');
@@ -47,4 +41,14 @@ class Funcionario extends CI_Controller {
 
 		echo json_encode($Retorno);
 	}
+
+    public function montaGrid(){
+		$this->load->model('FuncionarioMod');
+		$Funcionarios 						= $this->FuncionarioMod->Listar();
+		$Dados['Funcionarios'] 				= $Funcionarios;
+
+		$Dados['success'] = ($Dados['Funcionarios']) ? true : false;
+
+		echo json_encode($Dados);
+    }
 }
