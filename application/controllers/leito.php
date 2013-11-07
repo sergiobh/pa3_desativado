@@ -9,15 +9,20 @@ class Leito extends CI_Controller {
 	}
 
 	public function listar(){
-
-		$this->load->model('LeitoMod');
-		$Leitos 					= $this->LeitoMod->Listar();
-		$Dados['Leitos'] 			= $Leitos;
-
 		$Dados['View'] 					= 'leito/listar';
 		$this->load->view('body/index', $Dados);
 	}
 	
+	public function getListar(){
+		$this->load->model('LeitoMod');
+		$Leitos 					= $this->LeitoMod->Listar();
+		$Dados['Leitos'] 			= $Leitos;
+
+		$Dados['success'] 			= true; 	
+
+		echo json_encode($Dados);
+	}	
+
 	public function salvarCadastro(){
 
 		$QuartoId	   = $this->input->post("QuartoId");
