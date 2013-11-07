@@ -4,10 +4,6 @@ class Leito extends CI_Controller {
 
 	public function cadastrar()
 	{
-		$this->load->model('QuartoMod');
-		$Andar 							= $this->QuartoMod->getAndar();
-		$Dados['Andar'] 				= $Andar;
-
 		$Dados['View'] 					= 'leito/cadastrar';
 		$this->load->view('body/index', $Dados);
 	}
@@ -43,6 +39,14 @@ class Leito extends CI_Controller {
 	public function editar(){
 
 		$LeitoId = $this->uri->segment(3);
+		$Dados['LeitoId'] 				= $LeitoId; 
+
+		$Dados['View'] 					= 'leito/editar';
+		$this->load->view('body/index', $Dados);
+	}
+
+	public function getEditar(){
+		$LeitoId = $this->uri->segment(3);
 
 		$this->load->model("LeitoMod");
 		$this->LeitoMod->LeitoId		= $LeitoId;
@@ -53,8 +57,9 @@ class Leito extends CI_Controller {
 		$Dados['Leito']					= $Leito;
 		$Dados['Status']				= $Status;
 
-		$Dados['View'] 					= 'leito/editar';
-		$this->load->view('body/index', $Dados);
+		$Dados['success'] 				= true;
+
+		echo json_encode($Dados);
 	}
 
 	public function salvarEdicao(){

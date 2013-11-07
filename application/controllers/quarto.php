@@ -19,22 +19,25 @@ class Quarto extends CI_Controller {
 	}
 
 	public function getAndar(){
-		$PacienteId 					= $this->input->post("PacienteId");
-		$Ocupacao 						= $this->input->post("Ocupacao");
+		$PacienteId 					= $this->input->get("PacienteId");
+		$Ocupacao 						= $this->input->get("Ocupacao");
 
 		$this->load->model('QuartoMod');
 		$this->QuartoMod->Ocupacao 		= $Ocupacao;
 		$this->QuartoMod->PacienteId	= $PacienteId;
 		$Andar 							= $this->QuartoMod->getAndar();
-		$Dados['Andar'] 				= $Andar;
+		$Dados['Andares'] 				= $Andar;
 
-		$this->load->view('quarto/selectAndar', $Dados);
+		$Dados['success'] 				= true;
+
+		//$this->load->view('quarto/selectAndar', $Dados);
+		echo json_encode($Dados);
 	}
 
 	public function getQuartos(){
-		$Andar 			= $this->input->post("Andar");
-		$Ocupacao 		= $this->input->post("Ocupacao");
-		$PacienteId 	= $this->input->post("PacienteId");
+		$Andar 			= $this->input->get("Andar");
+		$Ocupacao 		= $this->input->get("Ocupacao");
+		$PacienteId 	= $this->input->get("PacienteId");
 
 		$this->load->model('QuartoMod');
 		$this->QuartoMod->Andar 		= $Andar;
@@ -43,7 +46,10 @@ class Quarto extends CI_Controller {
 		$Quartos 						= $this->QuartoMod->getQuartos();
 		$Dados['Quartos'] 				= $Quartos;
 
-		$this->load->view('quarto/selectQuarto', $Dados);
+		$Dados['success'] 				= true;
+
+		//$this->load->view('quarto/selectQuarto', $Dados);
+		echo json_encode($Dados);
 	}
 	
 	public function processar(){
