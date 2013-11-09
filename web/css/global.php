@@ -1,5 +1,5 @@
 <?php header('Content-type: text/css');?>
-<?php define('BASE_IMG','http://'.$_SERVER['HTTP_HOST']);?>
+<?php define('BASE_IMG',(isset($_SERVER['HTTPS']) ? 'https://' : 'http://').$_SERVER['HTTP_HOST']);?>
 <?php echo "/*";?><style><?php echo "*/\n";?>
 html{
 	background: none repeat scroll 0 0 #E1E1E5;
