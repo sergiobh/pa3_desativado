@@ -5,7 +5,8 @@
 			<tr>
 				<th>Código</th>
 				<th>Nome</th>
-				<th>CPF</th>				
+				<th>CPF</th>
+				<th>Grupo</th>
 			</tr>
 		</thead> 
 		<tbody id = "conteudo_grid">
@@ -46,6 +47,7 @@
 									Grid += "<td>"+Funcionarios[Reg].FuncionarioId+"</td>";
 									Grid += "<td>"+Funcionarios[Reg].Nome+"</td>";
 									Grid += "<td>"+Funcionarios[Reg].Cpf+"</td>";
+									Grid += "<td>"+Funcionarios[Reg].Grupo+"</td>";
 									Grid += "</tr>";
 								}
 

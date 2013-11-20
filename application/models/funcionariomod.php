@@ -37,8 +37,10 @@ class FuncionarioMod extends CI_Model{
                         F.FuncionarioId
                         ,F.Nome
                         ,F.Cpf
+                        ,G.nome AS Grupo
                     FROM
                         funcionario F
+                        INNER JOIN grupo G ON G.GrupoId = F.GrupoId
                     ORDER BY
                         F.Nome
                     ";
