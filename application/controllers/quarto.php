@@ -94,11 +94,13 @@ class Quarto extends CI_Controller {
 
 		$QuartoId	   	= $this->input->post("QuartoId");
 		$Identificacao 	= $this->input->post("Identificacao");
+		$Andar 			= $this->input->post("Andar");
 		$Status 		= $this->input->post("Status");
 
 		$this->load->model("QuartoMod");
 		$this->QuartoMod->QuartoId		= $QuartoId;
 		$this->QuartoMod->Identificacao	= $Identificacao;
+		$this->QuartoMod->Andar			= $Andar;
 		$this->QuartoMod->Status		= $Status;
 		$this->QuartoMod->setEdicao();
 	}

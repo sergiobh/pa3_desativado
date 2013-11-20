@@ -6,7 +6,7 @@
 				<tr>
 					<td class='col_titulo'>Andar:</td>
 					<td>
-						<input type="text" id="Andar" value="<?php echo $Quarto->Andar;?>" <?php echo ($Quarto->Status == '3') ? 'readonly="readonly"' : '';?> >
+						<input type="text" id="Andar" value="<?php echo $Quarto->Andar;?>" <?php echo ($Quarto->Status == '3') ? 'readonly="readonly"' : '';?> obrigatorio = 'sim' >
 					</td>
 				</tr>
 				<tr>
@@ -55,13 +55,14 @@
 
 				// Declaração de variaveis
 				var QuartoId 	= <?php echo $Quarto->QuartoId;?>;
+				var Andar 		= $("#Andar").val();
 				var Identificacao 	= $("#Identificacao").val();
 				var Status		= $("#Status option:selected").val();
 
 				// Executa o POST usando metodo AJAX e retorando Json
 				var Url				= '<?php echo BASE_URL;?>/quarto/salvarEdicao';
 
-				var data 			= 'QuartoId='+QuartoId+'&Status='+Status+'&Identificacao='+Identificacao;
+				var data 			= 'Andar='+Andar+'&QuartoId='+QuartoId+'&Status='+Status+'&Identificacao='+Identificacao;
 
 				$.blockUI({ message: '<h1>Salvando os dados...</h1>' });
 

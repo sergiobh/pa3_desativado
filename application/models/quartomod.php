@@ -349,7 +349,7 @@ class QuartoMod extends CI_Model{
         if(! $this->existQuarto()){
 
             // tratamento de status
-            $sql_status = '';
+            //$sql_status = '';
 
             $sql_status = ",Status = ".$this->Status;
             
@@ -358,6 +358,7 @@ class QuartoMod extends CI_Model{
                                 quarto 
                             SET
                                 Identificacao = '".$this->Identificacao."'
+                                ,Andar = '".$this->Andar."'
                                 ".$sql_status."
                             WHERE
                                 QuartoId = ".$this->QuartoId."
