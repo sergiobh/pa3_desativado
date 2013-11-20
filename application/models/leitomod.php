@@ -263,22 +263,29 @@ class LeitoMod extends CI_Model{
         }
     }
 
-    public function getStatusAll(){
-        $Item->Status   = 0;
-        $Item->Nome     = 'Desativado';
-        $Status[]       = $Item;
+    public function getStatusAll($Status = 0){
+        if($Status == 3){
+            $Item->Status   = 3;
+            $Item->Nome     = 'Ocupado';
+            $ListStatus[]   = $Item;
+        }
+        else{
+            $Item->Status   = 0;
+            $Item->Nome     = 'Desativado';
+            $ListStatus[]   = $Item;
 
-        unset($Item);
-        $Item->Status   = 1;
-        $Item->Nome     = 'Ativo';
-        $Status[]       = $Item;
+            unset($Item);
+            $Item->Status   = 1;
+            $Item->Nome     = 'Ativo';
+            $ListStatus[]   = $Item;
 
-        unset($Item);
-        $Item->Status   = 2;
-        $Item->Nome     = 'Arrumação';
-        $Status[]       = $Item;
+            unset($Item);
+            $Item->Status   = 2;
+            $Item->Nome     = 'Arrumação';
+            $ListStatus[]   = $Item;
+        }
 
-        return $Status;
+        return $ListStatus;
     }
 }
 ?>

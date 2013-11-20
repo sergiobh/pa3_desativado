@@ -64,7 +64,9 @@ class Leito extends CI_Controller {
 		$this->LeitoMod->LeitoId		= $LeitoId;
 		$Leito  						= $this->LeitoMod->getLeito();
 
-		$Status 						= $this->LeitoMod->getStatusAll();
+		$Status = (isset($Leito->Status)) ? $Leito->Status : 0;
+
+		$Status 						= $this->LeitoMod->getStatusAll($Status);
 
 		$Dados['Leito']					= $Leito;
 		$Dados['Status']				= $Status;
