@@ -4,11 +4,14 @@ class Quarto extends CI_Controller {
 
 	public function cadastrar()
 	{
+		$this->CheckLogado();
+
 		$Dados['View'] 					= 'quarto/cadastrar';
 		$this->load->view('body/index', $Dados);
 	}
 
 	public function listar(){
+		$this->CheckLogado();
 
 		$this->load->model('QuartoMod');
 		$Quartos 						= $this->QuartoMod->Listar();
@@ -53,6 +56,8 @@ class Quarto extends CI_Controller {
 	}
 	
 	public function processar(){
+		$this->CheckLogado();
+
 		$Dados['View'] 					= 'quarto/processar';
 		$this->load->view('body/index', $Dados);
 	}
@@ -68,6 +73,8 @@ class Quarto extends CI_Controller {
 	}
 
 	public function editar(){
+		$this->CheckLogado();
+
 		$QuartoId = $this->uri->segment(3);
 
 		$this->load->model("QuartoMod");

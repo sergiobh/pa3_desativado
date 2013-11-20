@@ -11,7 +11,7 @@ class FuncionarioMod extends CI_Model{
 
         $sql    = "
                     SELECT
-                        F.FuncionarioId
+                        F.*
                     FROM
                         funcionario F
                     WHERE
@@ -23,7 +23,7 @@ class FuncionarioMod extends CI_Model{
         $dados = $query->result();
 
         if(count($dados) > 0){
-            return true;
+            return $dados[0];
         }
         else{
             return false;

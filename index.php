@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 /*
  * Correção de charset no php
 */

@@ -4,6 +4,8 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
+		$this->CheckLogado();
+
 		$Dados['View'] 					= 'home/home';
 		$this->load->view('body/index', $Dados);
 	}

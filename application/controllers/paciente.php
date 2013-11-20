@@ -4,6 +4,8 @@ class Paciente extends CI_Controller {
 
 	public function cadastrar()
 	{
+		$this->CheckLogado();
+
 		$Dados['Script'][]				= 'jquery/jquery.maskedinput.js';
 
 		$Dados['View'] 					= 'paciente/cadastrar';
@@ -43,6 +45,8 @@ class Paciente extends CI_Controller {
 	}
 
 	public function painel(){
+		$this->CheckLogado();
+
 
 		$this->load->model('PacienteMod');
 		$Pacientes 						= $this->PacienteMod->Listar();
@@ -53,6 +57,8 @@ class Paciente extends CI_Controller {
 	}
 
 	public function consultar(){
+		$this->CheckLogado();
+
 		/*
 		/* Adicionar um script Javascript somente neste HEADER
 		*/
@@ -86,6 +92,8 @@ class Paciente extends CI_Controller {
 	}
 
 	public function editar(){
+		$this->CheckLogado();
+
 		$PacienteId 					= $this->input->post("PacienteId");
 
 		if(!is_numeric($PacienteId) || $PacienteId == ''){

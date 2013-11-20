@@ -4,6 +4,8 @@ class Ocupacao extends CI_Controller {
 
 	public function cadastrar()
 	{
+		$this->CheckLogado();
+
 		$this->load->model('PacienteMod');
 		$Pacientes 							= $this->PacienteMod->FilaEspera();
 
@@ -13,6 +15,7 @@ class Ocupacao extends CI_Controller {
 	}
 
 	public function desocupar(){
+		$this->CheckLogado();
 
 		$OcupacaoId							= $this->input->post("OcupacaoId");
 

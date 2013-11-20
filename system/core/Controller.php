@@ -57,6 +57,17 @@ class CI_Controller {
 	{
 		return self::$instance;
 	}
+
+    protected function CheckLogado($Logado = false){
+    	if(!isset($_SESSION['Funcionario']->FuncionarioId) || $Logado){
+    		$_SESSION['REDIRECT_URL'] = $_SERVER['REDIRECT_URL'];
+
+			header('Location: '.BASE_URL.'/funcionario/login');
+    	}
+    	else if(isset($_SESSION['REDIRECT_URL'])){
+    		unset($_SESSION['REDIRECT_URL']);
+    	}
+	}
 }
 // END Controller class
 

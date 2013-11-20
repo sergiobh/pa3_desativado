@@ -24,6 +24,28 @@ body{
 	width: 260px;
 	height: 110px;
 }
+.middle .logout{
+	float:right;
+	margin-right: 100px;
+	position: relative;
+	z-index: 100;
+}
+.middle .logout .nome{
+	float:left;
+}
+.middle .logout .deslogar{
+	float: left;
+	margin-left: 2px;
+	width: 20px;
+}
+.middle .logout .deslogar a{
+	color: #333333;
+	display: block;
+}
+.middle .logout .deslogar a:hover,
+.middle .logout .deslogar a:visited{
+	color: #333333;
+}
 .middle .container{
     margin: 0 auto;
     min-height: 500px;
@@ -48,7 +70,7 @@ body{
 	z-index: 90;
 }
 .middle .menu_header .menu_content{
-	padding: 54px 100px 0 100px;
+	padding: 54px 99px 0 100px;
 }
 .middle .menu_header .menu_content .botao{
 	display: block;

@@ -4,11 +4,15 @@ class Leito extends CI_Controller {
 
 	public function cadastrar()
 	{
+		$this->CheckLogado();
+
 		$Dados['View'] 					= 'leito/cadastrar';
 		$this->load->view('body/index', $Dados);
 	}
 
 	public function listar(){
+		$this->CheckLogado();
+
 		$Dados['View'] 					= 'leito/listar';
 		$this->load->view('body/index', $Dados);
 	}
@@ -37,12 +41,15 @@ class Leito extends CI_Controller {
 	}
 
 	public function processar(){
+		$this->CheckLogado();
+
 		$Dados['View'] 					= 'leito/processar';
 		$this->load->view('body/index', $Dados);
 	}
 
 	public function editar(){
-
+		$this->CheckLogado();
+		
 		$LeitoId = $this->uri->segment(3);
 		$Dados['LeitoId'] 				= $LeitoId; 
 
