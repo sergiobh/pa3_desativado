@@ -19,7 +19,7 @@
 				<td class='col_titulo'>Andar:</td>
 				<td>
 					<select name = 'AndarId' id='AndarId' descricao = 'Andar' obrigatorio = 'sim'>
-						<option value="-1">--- Selecione ---</option>
+						<option value="-1">--- Selecione o paciente ---</option>
 					</select>
 				</td>
 			</tr>
@@ -56,12 +56,15 @@
 
 			$('#PacienteId').change(function(){
 				var PacienteId 	= $(this).val();
+				var Andar 		= '<option value="-1">--- Selecione o andar ---</option>';
+				var Quarto 		= '<option value="-1">--- Selecione o quarto ---</option>';
+				var Leito 		= '<option value="-1">--- Selecione o leito ---</option>';
 
-				$('#QuartoId').html('<option value="-1">--- Selecione o quarto ---</option>');
-				$('#LeitoId').html('<option value="-1">--- Selecione o leito ---</option>');
+				$('#QuartoId').html(Quarto);
+				$('#LeitoId').html(Leito);
 
 				if(PacienteId == -1){
-					$('#AndarId').html('<option value="-1">--- Selecione o andar ---</option>');
+					$('#AndarId').html(Andar);
 				}
 				else{
 					var Url		= '<?php echo BASE_URL;?>/quarto/getAndar';
@@ -71,12 +74,28 @@
 					$.blockUI({ message: '<h1>Carregando os andares...</h1>' });
 
 					$.ajax({
-						type: "POST",
+						type: "GET",
 						url: Url,
-						data: data,					
+						data: data,
+						dataType: 'json',				
 						success: function(retorno){
-							$('#AndarId').html('<option value="-1">--- Selecione ---</option>' + retorno);
-							$.unblockUI();
+							var Dados = "";
+
+							if(retorno.success){
+								var Andares = retorno.Andares;
+
+								for(Reg in Andares){
+									Dados += '<option value="'+Andares[Reg].Andar+'">'+Andares[Reg].Andar+'</option>';
+								}
+
+								$('#AndarId').html('<option value="-1">--- Selecione ---</option>' + Dados);
+								$.unblockUI();
+							}
+							else{
+								
+								$('.retorno_ajax').html('Ocorreu um erro no servidor. Favor recarregar a página!');
+								$.unblockUI();
+							}
 						},
 						error: function(){
 							$('.retorno_ajax').html('Ocorreu um erro no servidor. Favor recarregar a página!');
@@ -107,12 +126,28 @@
 					$.blockUI({ message: '<h1>Carregando os quartos...</h1>' });
 
 					$.ajax({
-						type: "POST",
+						type: "GET",
 						url: Url,
-						data: data,					
+						data: data,
+						dataType: 'json',		
 						success: function(retorno){
-							$('#QuartoId').html('<option value="-1">--- Selecione ---</option>' + retorno);
-							$.unblockUI();
+							var Dados = "";
+
+							if(retorno.success){
+								var Quartos = retorno.Quartos;
+
+								for(Reg in Quartos){
+									Dados += '<option value="'+Quartos[Reg].QuartoId+'">'+Quartos[Reg].Quarto+'</option>';
+								}
+
+								$('#QuartoId').html('<option value="-1">--- Selecione ---</option>' + Dados);
+								$.unblockUI();
+							}
+							else{
+								
+								$('.retorno_ajax').html('Ocorreu um erro no servidor. Favor recarregar a página!');
+								$.unblockUI();
+							}
 						},
 						error: function(){
 							$('.retorno_ajax').html('Ocorreu um erro no servidor. Favor recarregar a página!');
@@ -141,7 +176,7 @@
 					$.blockUI({ message: '<h1>Carregando os leitos...</h1>' });
 
 					$.ajax({
-						type: "POST",
+						type: "GET",
 						url: Url,
 						data: data,		
 						dataType: 'json',			

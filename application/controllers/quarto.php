@@ -29,9 +29,9 @@ class Quarto extends CI_Controller {
 		$this->QuartoMod->Ocupacao 		= $Ocupacao;
 		$this->QuartoMod->PacienteId	= $PacienteId;
 		$Andar 							= $this->QuartoMod->getAndar();
-		$Dados['Andares'] 				= $Andar;
+		$Dados["Andares"] 				= $Andar;
 
-		$Dados['success'] 				= true;
+		$Dados["success"] 				= true;
 
 		//$this->load->view('quarto/selectAndar', $Dados);
 		echo json_encode($Dados);

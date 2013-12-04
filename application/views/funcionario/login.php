@@ -23,8 +23,13 @@
     </tr>
   </table>
 </form>
+<?php /*
+<a id="contrato" href="#inline1" title="Contrato">aasfasfjadklfjasf</a>
+*/?>
+<a data-fancybox-type="iframe" id="contrato" href='<?php echo BASE_URL;?>/contrato'>aasfasfjadklfjasf</a>
 <script type="text/javascript">
 $(document).ready(function(){
+
   $('.botao_submit').click(function(){
 
     // Validação do formulário padrão
@@ -32,6 +37,17 @@ $(document).ready(function(){
       return false;
     }
 
+    jConfirm('zfsfhas fsjh slgh wgdgkjh glkjdsgh lskgjh eiug ehrhgiehgeklgh gjlk', 'Contrato de Utilização', function(r) {
+      //jAlert('Confirmed: ' + r, 'Confirmation Results');
+      if(r){
+        logar();
+      }
+    });
+
+  });
+
+
+  function logar(){
     var Cpf       = $("#Cpf").val();
     var Senha     = $("#Senha").val();
 
@@ -73,8 +89,6 @@ $(document).ready(function(){
         //$.unblockUI();
       }
     });
-
-
-  });
+  }  
 });
 </script>

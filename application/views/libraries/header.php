@@ -18,5 +18,12 @@
 				}
 			}
 		?>
+		<?php
+			if(isset($Css)){
+				foreach ($Css as $Registro) {
+					echo '<link rel="stylesheet" href="'.BASE_URL.'/web/css/'.$Registro.'" type="text/css" media="screen" />';
+				}
+			}
+		?>
 	</head>
 	<body>

@@ -93,6 +93,12 @@ class Funcionario extends CI_Controller {
 	}
 
 	public function login(){
+		$Dados['Script'][]				= 'jquery/jquery.alerts.js';
+		$Dados['Script'][]				= 'jquery/jquery.ui.draggable.js';
+
+		$Dados['Css'][] 				= 'jquery.alerts.css';
+
+
 		$Dados['View'] 					= 'funcionario/login';
 		$this->load->view('body/index', $Dados);
 	}

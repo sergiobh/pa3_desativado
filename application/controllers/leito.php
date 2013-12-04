@@ -92,7 +92,7 @@ class Leito extends CI_Controller {
 	}
 
 	public function getLeitos(){
-		$QuartoId 		= $this->input->post("QuartoId");
+		$QuartoId 		= $this->input->get("QuartoId");
 
 		$this->load->model("LeitoMod");
 		$this->LeitoMod->QuartoId		= $QuartoId;

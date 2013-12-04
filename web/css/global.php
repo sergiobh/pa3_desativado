@@ -323,6 +323,11 @@ th.header {
 }
 */
 
+.fancybox-skin{
+	position: relative;
+	z-index: 200;
+}
+
 <?php /*
 /* Clear
 */ ?>
